@@ -2,6 +2,7 @@
   <div class="hello">
     <!-- 登录页 用户表单 -->
     <div class="box" >
+      <span class="icon iconfont icon-yonghu1"></span>
       <van-field
         v-model="username"
         clearable
@@ -11,7 +12,9 @@
         left-icon="contact"
         :border="false"
         @click-right-icon="$toast('用户名必须是手机号')"
-      />
+      >
+        <van-icon class="iconfont" class-prefix="icon" slot="left-icon" name="icon-user"></van-icon>
+      </van-field>
 
       <van-field
         v-model="password"
@@ -20,11 +23,14 @@
         label="密码"
         right-icon="question-o"
         placeholder="请输入密码"
-        left-icon="closed-eye"
+        left-icon="mima"
         :border="false"
         @click-right-icon="$toast('密码必须是数字、字母、下划线')"
         style="margin-top: 20px"
-      />
+      >
+        <van-icon class="iconfont" class-prefix="icon" slot="left-icon" name="mima"></van-icon>
+
+      </van-field>
       <!--登录按钮-->
       <div class="pd15"><van-button type="danger" size="large" @click="onClickButtonSubmit">登录</van-button></div>
     </div>
@@ -96,12 +102,26 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .van-field >>> .icon-mima,.icon-icon-user{
+    font-size: 25px;
+  }
+  .van-field >>> .van-cell__title{
+    font-size: 0.5rem;
+    line-height: 0.7rem;
+  }
+  .van-field >>> .van-field__label{
+    width: 2.5rem;
+  }
+  .icon-yonghu1{
+    font-size: 200px;
+    color: #cccccc;
+  }
   .hello{
     /*display: table-cell;*/
     /*vertical-align: middle;*/
     /*text-align: center;*/
     height: 100%;
-    background: #2c3e50;
+    /*background: #2c3e50;*/
   }
   .box{
     position: absolute;

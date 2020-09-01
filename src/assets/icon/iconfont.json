@@ -1,0 +1,37 @@
+{
+  "id": "2040744",
+  "name": "律师事务所",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1969477",
+      "name": "我的任务",
+      "font_class": "woderenwu",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    },
+    {
+      "icon_id": "730799",
+      "name": "用户",
+      "font_class": "icon-user",
+      "unicode": "e677",
+      "unicode_decimal": 58999
+    },
+    {
+      "icon_id": "807949",
+      "name": "mima",
+      "font_class": "mima",
+      "unicode": "e62b",
+      "unicode_decimal": 58923
+    },
+    {
+      "icon_id": "7588130",
+      "name": "用户",
+      "font_class": "yonghu1",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    }
+  ]
+}

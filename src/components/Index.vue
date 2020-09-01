@@ -3,7 +3,7 @@
     <router-view />
     <van-tabbar v-model="active" fixed active-color="#f00">
       <van-tabbar-item name="home" to="home" :icon="active=='home'?'wap-home':'wap-home-o'">首页</van-tabbar-item>
-      <!--      <van-tabbar-item name="friends" :icon="active=='friends'?'wap-home-o':'wap-home'">标签</van-tabbar-item>-->
+            <van-tabbar-item name="friends" :icon="active=='friends'?'wap-home-o':'wap-home'">工作台</van-tabbar-item>
       <van-tabbar-item name="our" to="our" :icon="active=='our'?icon.ourActiv:icon.our">我的</van-tabbar-item>
     </van-tabbar>
   </div>
