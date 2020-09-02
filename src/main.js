@@ -4,9 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import 'lib-flexible/flexible'
-import {Button,Cell, CellGroup,Form ,Field,Toast,Tabbar,TabbarItem,Swipe, SwipeItem,Lazyload,Grid, GridItem} from 'vant'
+import {Button,Cell, CellGroup,Form ,Field,Toast,Tabbar,TabbarItem,Swipe, SwipeItem,Lazyload,Grid, GridItem,Popup ,Area } from 'vant'
 
-Vue.use(Button).use(Cell).use(CellGroup).use(Form).use(Field).use(Toast).use(Tabbar).use(TabbarItem).use(Swipe).use(SwipeItem).use(Lazyload).use(Grid).use(GridItem)
+Vue.use(Button).use(Cell).use(CellGroup).use(Form).use(Field).use(Toast).use(Tabbar).use(TabbarItem).use(Swipe).use(SwipeItem).use(Lazyload).use(Grid).use(GridItem).use(Popup).use(Area)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

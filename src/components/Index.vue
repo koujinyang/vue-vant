@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+<!--    <img src="../assets/images/homeActive.png" alt="">-->
     <router-view />
     <van-tabbar v-model="active" fixed active-color="#f00">
       <van-tabbar-item name="home" to="home" :icon="active=='home'?'wap-home':'wap-home-o'">首页</van-tabbar-item>
@@ -34,6 +35,7 @@
     },
     components: {
       // HelloWorld,
+
     }
   };
 </script>
