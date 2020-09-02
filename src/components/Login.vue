@@ -2,7 +2,9 @@
   <div class="hello">
     <!-- 登录页 用户表单 -->
     <div class="box" >
-      <span class="icon iconfont icon-yonghu1"></span>
+      <div style="text-align: center">
+        <span class="icon iconfont icon-yonghu1"></span>
+      </div>
       <van-field
         v-model="username"
         clearable
@@ -115,6 +117,8 @@
   .icon-yonghu1{
     font-size: 200px;
     color: #cccccc;
+    text-align: center;
+    margin: 0 auto;
   }
   .hello{
     /*display: table-cell;*/

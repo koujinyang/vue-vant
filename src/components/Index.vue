@@ -4,7 +4,10 @@
     <router-view />
     <van-tabbar v-model="active" fixed active-color="#f00">
       <van-tabbar-item name="home" to="home" :icon="active=='home'?'wap-home':'wap-home-o'">首页</van-tabbar-item>
-            <van-tabbar-item name="friends" :icon="active=='friends'?'wap-home-o':'wap-home'">工作台</van-tabbar-item>
+            <van-tabbar-item name="work" to="work" :icon="active=='friends'?'wap-home-o':'wap-home'">
+              <van-icon class="iconfont" class-prefix="icon" slot="icon" name="caidan"></van-icon>
+              工作台
+            </van-tabbar-item>
       <van-tabbar-item name="our" to="our" :icon="active=='our'?icon.ourActiv:icon.our">我的</van-tabbar-item>
     </van-tabbar>
   </div>
@@ -40,6 +43,9 @@
   };
 </script>
 <style scoped>
+  .van-tabbar-item >>> .icon-caidan{
+    font-size: 0.8rem;
+  }
   .van-tabbar-item{
     font-size: 14px;
   }

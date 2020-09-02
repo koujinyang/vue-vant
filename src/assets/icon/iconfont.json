@@ -6,6 +6,41 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "8312085",
+      "name": "漏斗",
+      "font_class": "loudou",
+      "unicode": "e61f",
+      "unicode_decimal": 58911
+    },
+    {
+      "icon_id": "6207781",
+      "name": "禁止",
+      "font_class": "ziyuanldpi",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "286209",
+      "name": "导航-首页",
+      "font_class": "daohangshouye",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "14095293",
+      "name": "菜单",
+      "font_class": "caidan",
+      "unicode": "e789",
+      "unicode_decimal": 59273
+    },
+    {
+      "icon_id": "14658638",
+      "name": "我的",
+      "font_class": "wode",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
       "icon_id": "1969477",
       "name": "我的任务",
       "font_class": "woderenwu",
