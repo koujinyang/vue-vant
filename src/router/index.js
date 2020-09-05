@@ -5,8 +5,11 @@ import Login from '@/components/Login'
 import Index from '@/components/Index'
 import Home from '@/components/Home'
 import Work from '@/components/Work'
-import Our from '@/components/Our'
+import My from '@/components/My'
 import Fenpei from '@/components/Fenpei'
+import Anyuan from '@/components/Anyuan'
+import SetFuban from '@/components/SetFuban'
+import MyInformation from '@/components/MyInformation'
 
 Vue.use(Router)
 
@@ -24,7 +27,7 @@ export default new Router({
       redirect:'/home',
       children:[
         { path: '/home', name: 'Home', component: Home },
-        { path: '/our', name: 'Our', component: Our },
+        { path: '/my', name: 'My', component: My },
         { path: '/work', name: 'Work', component: Work },
         // { path: '/myFeipei', name: 'Feipei', component: Feipei },
 
@@ -34,6 +37,21 @@ export default new Router({
       path: '/fenpei/:id',
       name: 'Fenpei',
       component: Fenpei
+    },
+    {
+      path: '/anyuan/:id',
+      name: 'Anyuan',
+      component: Anyuan
+    },
+    {
+      path: '/setfuban/:id',
+      name: 'SetFuban',
+      component: SetFuban
+    },
+    {
+      path: '/myInformation/:id',
+      name: 'MyInformation',
+      component: MyInformation
     }
   ]
 })

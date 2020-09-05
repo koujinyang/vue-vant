@@ -1,6 +1,6 @@
 <template>
     <div>
-      <van-nav-bar title="我的分配" left-text="返回" left-arrow  @click-left="onClickLeft"
+      <van-nav-bar fixed placeholder  title="我的分配" left-text="返回" left-arrow  @click-left="onClickLeft"
                    @click-right="onClickRight">
         <template #right>
 <!--          <van-icon name="search" size="18" />-->
@@ -32,6 +32,42 @@
         :style="{ height: '50%' }">
         <van-area :area-list="areaList" :columns-num="1"  value="110000" ref="myArea"  title="选择省份" @confirm="onConfirm" @cancel="onCancel"/>
       </van-popup>
+      <van-pull-refresh v-model="refreshing" @refresh="onRefresh" :disabled="pullDown">
+        <van-list
+          v-model="loading"
+          :finished="finished"
+          finished-text="没有更多了"
+          @load="onLoad"
+        >
+<!--          <van-cell v-for="item in list" :key="item" :title="item" />-->
+          <van-checkbox-group v-model="result">
+            <van-cell-group>
+              <van-cell
+                v-for="(item, index) in list"
+                clickable
+                :key="item.id"
+                :title=" item.name"
+                is-link
+                center
+                :to="`/anyuan/${item.id}`"
+              >
+                <template #label>
+                  <div>案源号：{{item.AnYuanHao}}</div>
+                  <div>主联系电话：{{item.phoneNumber}}</div>
+                  <div>省份：{{item.rovince}}</div>
+                  <div>客户区域：{{item.userArea}}</div>
+                  <div>分配人员：{{item.allocation}}</div>
+                  <div>辅办人员：{{item.auxiliary}}</div>
+                  <div class="setFuban"><van-button color="#cccccc" round  plain @click.stop.prevent="choosePerson(item.id)">设置辅版</van-button></div>
+                </template>
+                <template #icon>
+                  <van-checkbox :name="item" ref="checkboxes" />
+                </template>
+              </van-cell>
+            </van-cell-group>
+          </van-checkbox-group>
+        </van-list>
+      </van-pull-refresh>
     </div>
 </template>
 
@@ -83,30 +119,83 @@
                 900000: '海外',
               },
             },
-            phoneNumber:""
+            phoneNumber:"",
+            list: [
+
+
+            ],
+            result: [],
+            loading: false,
+            finished: false,
+            refreshing: false,
+            pullDown:true
           }
       },
     //  1、我的分配 2、待反馈 3、待处理 4、待设置辅办 5、已签合同 6、今日分配 7、本月分配 8、本年分配
-      methods:{
-        onClickRight(){
+      methods: {
+        onClickRight() {
           this.show = true;
         },
-        onClickLeft(){
+        onClickLeft() {
           this.$router.go(-1)
-        } ,
+        },
 
-        chooseArea(){
-          this.showArea=true;
+        chooseArea() {
+          this.showArea = true;
         },
         //确定选择城市
-        onConfirm(val){
-          this.areaName=val[0].name;
+        onConfirm(val) {
+          this.areaName = val[0].name;
           this.showArea = false//关闭弹框
         },
         //取消选中城市
-        onCancel(){
+        onCancel() {
           this.showArea = false
           this.$refs.myArea.reset()// 重置城市列表
+        },
+        onLoad() {
+          setTimeout(() => {
+            if (this.refreshing) {
+              this.list = [];
+              this.refreshing = false;
+            }
+
+            for (let i = 0; i < 10; i++) {
+              this.list.push({
+                id:this.list.length+1,
+                name:"张三",
+                AnYuanHao:'2020082900000',
+                phoneNumber:"15900000000",
+                rovince:"北京",
+                userArea:"海淀",
+                allocation:"张三、李四",
+                auxiliary:"王五"
+
+              });
+            }
+            this.loading = false;
+
+            if (this.list.length >= 40) {
+              this.finished = true;
+            }
+          }, 1000);
+        },
+        onRefresh() {
+          // 清空列表数据
+          this.finished = false;
+
+          // 重新加载数据
+          // 将 loading 设置为 true，表示处于加载状态
+          this.loading = true;
+          this.onLoad();
+        },
+        toggle(index) {
+          // this.$refs.checkboxes[index].toggle();
+        },
+        choosePerson(id){
+          this.$router.push({
+            path: `/setfuban/${id}`,
+          })
         }
       },
         mounted() {
@@ -116,7 +205,14 @@
 </script>
 
 <style scoped>
-
+  .setFuban{
+    position: absolute;
+    bottom: 0.5rem;
+    right: 1.5rem;
+  }
+  .van-cell__title, .van-cell__value{
+    margin-left: 15px;
+  }
   .rightTittle{
     position: relative;
     text-align: center;

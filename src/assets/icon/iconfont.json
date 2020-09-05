@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "9041965",
+      "name": "版本",
+      "font_class": "banben",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
       "icon_id": "8312085",
       "name": "漏斗",
       "font_class": "loudou",

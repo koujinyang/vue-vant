@@ -8,7 +8,7 @@
               <van-icon class="iconfont" class-prefix="icon" slot="icon" name="caidan"></van-icon>
               工作台
             </van-tabbar-item>
-      <van-tabbar-item name="our" to="our" :icon="active=='our'?icon.ourActiv:icon.our">我的</van-tabbar-item>
+      <van-tabbar-item name="our" to="my" :icon="active=='our'?icon.ourActiv:icon.our">我的</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
