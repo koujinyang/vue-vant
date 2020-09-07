@@ -46,8 +46,8 @@
           </van-col>
         </van-row>
         <van-row style="position: fixed;bottom: 0;width: 100%;">
-          <van-col span="12"><van-button type="default" size="large">重置</van-button></van-col>
-          <van-col span="12"><van-button type="info" size="large">确认</van-button></van-col>
+          <van-col span="12"><van-button type="default" size="large" @click="reset">重置</van-button></van-col>
+          <van-col span="12"><van-button type="info" size="large" @click="save">确认</van-button></van-col>
         </van-row>
       </van-popup>
       <!--    <van-area title="选择省份" :area-list="areaList" value="110000" :columns-num="1" />-->
@@ -264,6 +264,15 @@
             this.radioBox1State=index;
 
           }
+        },
+        reset(){
+          this.number="";
+          this.areaName="";
+          this.radioBox1State=0;
+          this.radioBoxState=0;
+        },
+        save(){
+          this.show = false;
         }
       },
         mounted() {

@@ -47,6 +47,7 @@
         },
         saveName(){
           console.log(this.result);
+          this.$router.go(-1);
         }
       },
       mounted() {

@@ -24,7 +24,7 @@
       </van-cell-group>
       <div style="position: fixed;bottom: 80px;width: 100%;">
         <div style="padding: 0 20px;">
-          <van-button type="info" size="large" >退出账号</van-button>
+          <van-button type="info" size="large" @click="goLogin">退出账号</van-button>
         </div>
 
       </div>
@@ -38,6 +38,19 @@
           return{
             id:"1"
           }
+      },
+      methods:{
+        goLogin(){
+          this.$dialog.confirm({
+            message: '确定退出当前账号？',
+          }) .then(() => {
+            // on confirm
+            this.$router.push({ path:'/'});
+          })
+            .catch(() => {
+              // on canceltu
+            });
+        },
       },
       mounted() {
 

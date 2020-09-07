@@ -4,9 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import 'lib-flexible/flexible'
-import {Button,Cell, CellGroup,Form ,Field,Toast,Tabbar,TabbarItem,Swipe, SwipeItem,Lazyload,Grid, GridItem,Popup ,Area ,Icon,NavBar,Search ,List,PullRefresh  ,Checkbox, CheckboxGroup,Picker, Col, Row } from 'vant'
+import {Button,Cell, CellGroup,Form ,Field,Toast,Tabbar,TabbarItem,Swipe, SwipeItem,Lazyload,Grid, GridItem,Popup ,Area ,Icon,NavBar,Search ,List,PullRefresh  ,Checkbox, CheckboxGroup,Picker, Col, Row ,Dialog} from 'vant'
 
-Vue.use(Button).use(Cell).use(CellGroup).use(Form).use(Field).use(Toast).use(Tabbar).use(TabbarItem).use(Swipe).use(SwipeItem).use(Lazyload).use(Grid).use(GridItem).use(Popup).use(Area).use(Icon).use(NavBar).use(Search).use(List).use(PullRefresh).use(Checkbox).use(CheckboxGroup).use(Picker).use(Col).use(Row)
+Vue.use(Button).use(Cell).use(CellGroup).use(Form).use(Field).use(Toast).use(Tabbar).use(TabbarItem).use(Swipe).use(SwipeItem).use(Lazyload).use(Grid).use(GridItem).use(Popup).use(Area).use(Icon).use(NavBar).use(Search).use(List).use(PullRefresh).use(Checkbox).use(CheckboxGroup).use(Picker).use(Col).use(Row).use(Dialog)
 import './assets/icon/iconfont.css'
 import { Image as VanImage } from 'vant';
 Vue.use(VanImage);
