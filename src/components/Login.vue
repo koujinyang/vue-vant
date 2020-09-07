@@ -67,6 +67,7 @@
           return false;
         }
         else{
+          this.$toast.success('登录成功');
           this.$router.push({name:'Index'})
           // this.$toast('token='+token);
           // var that=this // 放置指针，便于then操作的获取

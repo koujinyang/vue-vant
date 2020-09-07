@@ -24,6 +24,31 @@
         <van-field v-model="number" type="text" label="人员分配"   placeholder="输入人员分配"/>
         <!-- 输入密码 -->
         <van-field v-model="number" type="text" label="辅办人员"   placeholder="输入辅办人员"/>
+        <div class="leftTittle">反馈状态</div>
+        <van-row gutter="20" style="text-align: center;padding: 0 16px ;">
+          <van-col span="8">
+            <span class="radioBox" :class="radioBoxState==1?'radioBox1':''" @click="changeState(1)" >未反馈</span>
+          </van-col>
+          <van-col span="8">
+            <span class="radioBox" :class="radioBoxState==2?'radioBox1':''" @click="changeState(2)" >有效</span>
+          </van-col>
+          <van-col span="8">
+            <span class="radioBox" :class="radioBoxState==3?'radioBox1':''" @click="changeState(3)" >无效</span>
+          </van-col>
+        </van-row>
+        <div class="leftTittle">辅办状态</div>
+        <van-row gutter="20" style="text-align: center;padding: 0 16px ;">
+          <van-col span="8">
+            <span class="radioBox" :class="radioBox1State==1?'radioBox1':''" @click="changeState1(1)" >已设置</span>
+          </van-col>
+          <van-col span="8">
+            <span class="radioBox" :class="radioBox1State==2?'radioBox1':''" @click="changeState1(2)" >未设置</span>
+          </van-col>
+        </van-row>
+        <van-row style="position: fixed;bottom: 0;width: 100%;">
+          <van-col span="12"><van-button type="default" size="large">重置</van-button></van-col>
+          <van-col span="12"><van-button type="info" size="large">确认</van-button></van-col>
+        </van-row>
       </van-popup>
       <!--    <van-area title="选择省份" :area-list="areaList" value="110000" :columns-num="1" />-->
       <van-popup
@@ -42,6 +67,15 @@
 <!--          <van-cell v-for="item in list" :key="item" :title="item" />-->
           <van-checkbox-group v-model="result">
             <van-cell-group>
+<!--              <van-cell-->
+<!--                v-for="(item, index) in list"-->
+<!--                clickable-->
+<!--                :key="item.id"-->
+<!--                :title=" item.name"-->
+<!--                is-link-->
+<!--                center-->
+<!--                :to="`/anyuan/${item.id}`"-->
+<!--              >-->
               <van-cell
                 v-for="(item, index) in list"
                 clickable
@@ -49,25 +83,31 @@
                 :title=" item.name"
                 is-link
                 center
-                :to="`/anyuan/${item.id}`"
               >
                 <template #label>
-                  <div>案源号：{{item.AnYuanHao}}</div>
-                  <div>主联系电话：{{item.phoneNumber}}</div>
-                  <div>省份：{{item.rovince}}</div>
-                  <div>客户区域：{{item.userArea}}</div>
-                  <div>分配人员：{{item.allocation}}</div>
-                  <div>辅办人员：{{item.auxiliary}}</div>
-                  <div class="setFuban"><van-button color="#cccccc" round  plain @click.stop.prevent="choosePerson(item.id)">设置辅版</van-button></div>
+                  <div @click="toAnyuan(item.id)">
+                    <div>案源号：{{item.AnYuanHao}}</div>
+                    <div>主联系电话：{{item.phoneNumber}}</div>
+                    <div>省份：{{item.rovince}}</div>
+                    <div>客户区域：{{item.userArea}}</div>
+                    <div>分配人员：{{item.allocation}}</div>
+                    <div>辅办人员：{{item.auxiliary}}</div>
+                  </div>
+                  <div class="setFuban" v-show="result.length==0"><van-button color="#cccccc" round  plain @click.stop.prevent="choosePerson(item.id)">设置辅版</van-button></div>
                 </template>
-                <template #icon>
-                  <van-checkbox :name="item" ref="checkboxes" />
+                <template #icon >
+                  <van-checkbox :name="item.id" ref="checkboxes"   @click="choosePersons"/>
+                </template>
+                <template #right-icon >
+                  <van-icon name="arrow"  @click="toAnyuan(item.id)"></van-icon>
                 </template>
               </van-cell>
             </van-cell-group>
           </van-checkbox-group>
         </van-list>
       </van-pull-refresh>
+      <div class="setFuban1" v-show="result.length>0"><van-button color="#f00" round   @click.stop.prevent="choosePerson1()">设置辅版</van-button></div>
+
     </div>
 </template>
 
@@ -120,19 +160,25 @@
               },
             },
             phoneNumber:"",
-            list: [
-
-
-            ],
+            list: [],
             result: [],
             loading: false,
             finished: false,
             refreshing: false,
-            pullDown:true
+            pullDown:true,
+            radioBoxState:0,
+            radioBox1State:0
           }
       },
     //  1、我的分配 2、待反馈 3、待处理 4、待设置辅办 5、已签合同 6、今日分配 7、本月分配 8、本年分配
       methods: {
+        toAnyuan(id){
+          console.log(id);
+          this.$router.push({name:'Anyuan',params: {id:id}})
+        },
+        choosePersons(){
+          console.log(this.result);
+        },
         onClickRight() {
           this.show = true;
         },
@@ -196,6 +242,28 @@
           this.$router.push({
             path: `/setfuban/${id}`,
           })
+        },
+        choosePerson1(){
+          var anyuanIds=this.result.toString().replace(",","&");
+          this.$router.push({
+            path: `/setfuban/${anyuanIds}`,
+          })
+        },
+        changeState(index){
+          if(this.radioBoxState==index){
+            this.radioBoxState=0;
+          }else {
+            this.radioBoxState=index;
+
+          }
+        },
+        changeState1(index){
+          if(this.radioBox1State==index){
+            this.radioBox1State=0;
+          }else {
+            this.radioBox1State=index;
+
+          }
         }
       },
         mounted() {
@@ -205,8 +273,24 @@
 </script>
 
 <style scoped>
+  .radioBox1{
+    background-color: rgba(255, 51, 0, 1);
+    border-color: rgba(242, 242, 242, 1);
+  }
+  .radioBox{
+    display: inline-block;
+    padding: 5px;
+    width: 100%;
+    border: 1px solid #cccccc;
+
+  }
   .setFuban{
     position: absolute;
+    bottom: 0.5rem;
+    right: 1.5rem;
+  }
+  .setFuban1{
+    position: fixed;
     bottom: 0.5rem;
     right: 1.5rem;
   }
@@ -219,6 +303,12 @@
     font-size: 0.4rem;
     line-height: 1rem;
     /*border-bottom: 1px solid #cccccc;*/
+  }
+  .leftTittle{
+    position: relative;
+    font-size: 0.4rem;
+    line-height: 1rem;
+    padding-left: 32px;
   }
   .rightTittle::after {
     position: absolute;
