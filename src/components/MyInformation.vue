@@ -2,11 +2,11 @@
 <div>
   <van-nav-bar
     title="我的资料"
-    left-text="返回"
     fixed
     placeholder
     left-arrow
     @click-left="onClickLeft"
+    class="navBox"
   />
   <div class="userTop">
     <span class="icon iconfont icon-yonghu1"></span>
@@ -60,6 +60,10 @@
 </script>
 
 <style scoped>
+
+  .navBox >>>.van-icon-arrow-left{
+    color: #000000;
+  }
   .icon-yonghu1{
     font-size: 2rem;
     color: #cccccc;

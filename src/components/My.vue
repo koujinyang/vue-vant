@@ -1,5 +1,11 @@
 <template>
     <div>
+      <van-nav-bar
+        title="我的"
+        fixed
+        placeholder
+        class="navBox"
+      />
       <van-row class="userTop">
         <van-col span="12" style="text-align: right">
           <span class="icon iconfont icon-yonghu1"></span>
@@ -22,9 +28,9 @@
           </template>
         </van-cell>
       </van-cell-group>
-      <div style="position: fixed;bottom: 80px;width: 100%;">
-        <div style="padding: 0 20px;">
-          <van-button type="info" size="large" @click="goLogin">退出账号</van-button>
+      <div style="position: fixed;bottom: 60px;width: 100%;">
+        <div style="padding: 0 15px;">
+          <van-button type="info" size="large" color="#c30000" @click="goLogin">退出账号</van-button>
         </div>
 
       </div>
@@ -45,7 +51,7 @@
             message: '确定退出当前账号？',
           }) .then(() => {
             // on confirm
-            this.$router.push({ path:'/'});
+            this.$router.push({ path:'/login'});
           })
             .catch(() => {
               // on canceltu
@@ -59,6 +65,10 @@
 </script>
 
 <style scoped>
+  .navBox >>> .van-ellipsis{
+    font-weight: 600;
+    font-size: 20px;
+  }
   .van-cell >>> .icon-icon-user,.icon-banben{
     font-size: 20px;
     color: #cccccc;

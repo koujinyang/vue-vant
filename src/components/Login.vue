@@ -2,8 +2,8 @@
   <div class="hello">
     <!-- 登录页 用户表单 -->
     <div class="box" >
-      <div style="text-align: center">
-        <span class="icon iconfont icon-yonghu1"></span>
+      <div style="text-align: center ;margin-bottom: 1rem;">
+        <span class="icon iconfont icon-yonghu"></span>
       </div>
       <van-field
         v-model="username"
@@ -115,11 +115,12 @@
   .van-field >>> .van-field__label{
     width: 2.5rem;
   }
-  .icon-yonghu1{
+  .icon-yonghu{
     font-size: 200px;
     color: #cccccc;
     text-align: center;
     margin: 0 auto;
+    color: #ff0000;
   }
   .hello{
     /*display: table-cell;*/

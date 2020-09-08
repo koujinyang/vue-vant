@@ -1,10 +1,10 @@
 <template>
     <div>
-      <van-nav-bar fixed placeholder  title="我的分配" left-text="返回" left-arrow  @click-left="onClickLeft"
-                   @click-right="onClickRight">
+      <van-nav-bar fixed placeholder  title="我的分配" left-arrow  @click-left="onClickLeft"
+                   @click-right="onClickRight" class="navBox">
         <template #right>
 <!--          <van-icon name="search" size="18" />-->
-          <van-icon class="iconfont" class-prefix="icon"  name="loudou" size="18" color="#1989fa"></van-icon>
+          <van-icon class="iconfont" class-prefix="icon"  name="loudou" size="18" ></van-icon>
         </template>
       </van-nav-bar>
       <van-search
@@ -81,32 +81,37 @@
                 clickable
                 :key="item.id"
                 :title=" item.name"
-                is-link
                 center
               >
                 <template #label>
                   <div @click="toAnyuan(item.id)">
-                    <div>案源号：{{item.AnYuanHao}}</div>
-                    <div>主联系电话：{{item.phoneNumber}}</div>
-                    <div>省份：{{item.rovince}}</div>
-                    <div>客户区域：{{item.userArea}}</div>
-                    <div>分配人员：{{item.allocation}}</div>
-                    <div>辅办人员：{{item.auxiliary}}</div>
+<!--                    <div>案源号：{{item.AnYuanHao}}</div>-->
+<!--                    <div>主联系电话：{{item.phoneNumber}}</div>-->
+<!--                    <div>省份：{{item.rovince}}</div>-->
+<!--                    <div>客户区域：{{item.userArea}}</div>-->
+<!--                    <div>分配人员：{{item.allocation}}</div>-->
+<!--                    <div>辅办人员：{{item.auxiliary}}</div>-->
+                    <van-field v-model="item.AnYuanHao"  label-width="3rem" label="案源号：" input-align="right" readonly/>
+                    <van-field v-model="item.phoneNumber"  label-width="3rem" label="主联系电话：" input-align="right" readonly/>
+                    <van-field v-model="item.rovince"  label-width="3rem" label="省份：" input-align="right" readonly/>
+                    <van-field v-model="item.userArea"  label-width="3rem" label="客户区域：" input-align="right" readonly/>
+                    <van-field v-model="item.allocation"  label-width="3rem" label="分配人员：" input-align="right" readonly/>
+                    <van-field v-model="item.auxiliary"  label-width="3rem" label="辅办人员：" input-align="right" readonly/>
                   </div>
-                  <div class="setFuban" v-show="result.length==0"><van-button color="#cccccc" round  plain @click.stop.prevent="choosePerson(item.id)">设置辅版</van-button></div>
+                  <div class="setFuban" v-show="result.length==0"><van-button color="#c30000"  size="small"   @click.stop.prevent="choosePerson(item.id)">设置辅办</van-button></div>
                 </template>
                 <template #icon >
                   <van-checkbox :name="item.id" ref="checkboxes"   @click="choosePersons"/>
                 </template>
-                <template #right-icon >
-                  <van-icon name="arrow"  @click="toAnyuan(item.id)"></van-icon>
-                </template>
+<!--                <template #right-icon >-->
+<!--                  <van-icon name="arrow"  @click="toAnyuan(item.id)"></van-icon>-->
+<!--                </template>-->
               </van-cell>
             </van-cell-group>
           </van-checkbox-group>
         </van-list>
       </van-pull-refresh>
-      <div class="setFuban1" v-show="result.length>0"><van-button color="#f00" round   @click.stop.prevent="choosePerson1()">设置辅版</van-button></div>
+      <div class="setFuban1" v-show="result.length>0"><van-button color="#c30000"  size="small"    @click.stop.prevent="choosePerson1()">设置辅版</van-button></div>
 
     </div>
 </template>
@@ -244,7 +249,7 @@
           })
         },
         choosePerson1(){
-          var anyuanIds=this.result.toString().replace(",","&");
+          var anyuanIds=this.result.toString().replace(/","/g,"&");
           this.$router.push({
             path: `/setfuban/${anyuanIds}`,
           })
@@ -282,6 +287,12 @@
 </script>
 
 <style scoped>
+  .navBox >>>.van-nav-bar__text{
+    color: #000000;
+  }
+  .navBox >>>.van-icon-arrow-left{
+    color: #000000;
+  }
   .radioBox1{
     background-color: rgba(255, 51, 0, 1);
     border-color: rgba(242, 242, 242, 1);
@@ -294,14 +305,29 @@
 
   }
   .setFuban{
-    position: absolute;
-    bottom: 0.5rem;
-    right: 1.5rem;
+    /*position: absolute;*/
+    /*bottom: 0.5rem;*/
+    /*right: 1rem;*/
+    text-align: right;
   }
   .setFuban1{
     position: fixed;
     bottom: 0.5rem;
-    right: 1.5rem;
+    right: 32px;
+  }
+  .van-field{
+    padding: 0 ;
+  }
+  .van-field::after{
+    border: none;
+  }
+  .van-field >>> .van-cell__title{
+    font-size: 0.3rem;
+    line-height: 0.7rem;
+    color: #969799;
+  }
+  .van-field >>>.van-field__control{
+    color: #969799;
   }
   .van-cell__title, .van-cell__value{
     margin-left: 15px;

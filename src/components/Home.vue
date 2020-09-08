@@ -6,6 +6,13 @@
 <!--        <img v-lazy="image" class="swipImg"/>-->
 <!--      </van-swipe-item>-->
 <!--    </van-swipe>-->
+
+    <van-nav-bar
+      title="首页"
+      fixed
+      placeholder
+      class="navBox"
+    />
     <van-image
       width="100%"
       lazy-load
@@ -53,6 +60,10 @@
 </script>
 
 <style scoped>
+  .navBox >>> .van-ellipsis{
+    font-weight: 600;
+    font-size: 20px;
+  }
   .van-cell{
     box-sizing: unset;
   }
@@ -63,7 +74,7 @@
   .icon-woderenwu{
 
     font-size: 0.8rem;
-    color: #cccccc;
+    color: #ff0000;
   }
   .myDistribution{
     font-size: 0.55rem;
@@ -73,6 +84,6 @@
   }
   .textNumber{
     font-size: 0.8rem;
-    color: #cccccc;
+    color: #ff0000;
   }
 </style>

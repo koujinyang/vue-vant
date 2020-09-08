@@ -1,5 +1,12 @@
 <template>
 <div>
+
+  <van-nav-bar
+    title="工作台"
+    fixed
+    placeholder
+    class="navBox"
+  />
   <div class="myDistribution">我的分配</div>
   <van-grid :column-num='3'>
     <van-grid-item    @click="toFeipei(2)">
@@ -70,20 +77,24 @@
 
 <style scoped>
 
+  .navBox >>> .van-ellipsis{
+    font-weight: 600;
+    font-size: 20px;
+  }
   .myDistribution{
     font-size: 0.55rem;
-    line-height: 1rem;
+    line-height: 1.2rem;
     /*background-color: #cccccc;*/
     padding: 0 0.2rem;
   }
 
   .textNumber{
     font-size: 0.8rem;
-    color: #cccccc;
+    color: #ff0000;
   }
   .icon-ziyuanldpi{
 
     font-size: 0.8rem;
-    color: #cccccc;
+    color: #ff0000;
   }
 </style>

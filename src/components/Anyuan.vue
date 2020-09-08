@@ -2,11 +2,11 @@
     <div>
       <van-nav-bar
         title="案源信息"
-        left-text="返回"
         fixed
         placeholder
         left-arrow
         @click-left="onClickLeft"
+        class="navBox"
       />
       <van-form >
         <div class="formTittle">基础信息</div>
@@ -62,7 +62,7 @@
         />
         <van-field
           v-model="anyuanData.allocation"
-          label="人员分配："
+          label="分配人员："
           readonly
           input-align="right"
         />
@@ -78,7 +78,7 @@
 <!--          </van-button>-->
 <!--        </div>-->
       </van-form>
-      <van-form style="margin: 20px 0">
+      <van-form style="margin: 20px 0;padding: 10px 0;">
         <van-field
           readonly
           clickable
@@ -106,9 +106,12 @@
           class="textareaBox"
           style=""
         />
-        <div style="margin: 5px 0 10px 0;text-align: right;clear: both">
-          <van-button color="#f00"  type="info" native-type="submit">
-            提交
+        <div style="text-align: center;clear: both">
+          <van-button color="#c30000"  size="small"  native-type="submit">
+            保存
+          </van-button>
+          <van-button color="#c30000" size="small" style="margin-left: 1rem"  native-type="submit">
+            取消
           </van-button>
         </div>
       </van-form>
@@ -173,6 +176,15 @@
 </script>
 
 <style scoped>
+  .van-button--small{
+    padding: 0 15px;
+  }
+  .navBox >>>.van-nav-bar__text{
+    color: #000000;
+  }
+  .navBox >>>.van-icon-arrow-left{
+    color: #000000;
+  }
   .genjinBox >>> .van-cell__title, .van-cell__value{
     -webkit-box-flex: auto;
     -webkit-flex: auto;

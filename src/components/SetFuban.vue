@@ -2,12 +2,13 @@
     <div>
       <van-nav-bar
         title="设置辅办"
-        left-text="返回"
         fixed
         placeholder
         left-arrow
         @click-left="onClickLeft"
+        class="navBox"
       />
+      <van-cell title="选择辅办人员" />
       <van-checkbox-group v-model="result">
         <van-cell-group>
           <van-cell
@@ -24,7 +25,7 @@
         </van-cell-group>
       </van-checkbox-group>
       <div style="text-align: center; margin-top: 20px;padding: 0 20px;">
-        <van-button color="#f00"  size="large" @click="saveName">保存</van-button>
+        <van-button color="#c30000"  size="small" @click="saveName">保存</van-button>
       </div>
     </div>
 </template>
@@ -58,4 +59,13 @@
 
 <style scoped>
 
+  .van-button--small{
+    padding: 0 15px;
+  }
+  .navBox >>>.van-nav-bar__text{
+    color: #000000;
+  }
+  .navBox >>>.van-icon-arrow-left{
+    color: #000000;
+  }
 </style>
