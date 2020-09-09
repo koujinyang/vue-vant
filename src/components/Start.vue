@@ -14,10 +14,17 @@
 <script>
     export default {
         name: "Start",
+      methods:{
+      },
       mounted() {
           let that=this;
           setTimeout(function () {
-            that.$router.push({ path:'/login'});
+            if(localStorage.getItem("lvshiIsLogin")=='yes'){
+              that.$router.push({ path:'/index'});
+            }else {
+              that.$router.push({ path:'/login'});
+            }
+
           },3000)
       }
     }

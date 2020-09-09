@@ -4,11 +4,11 @@
     <router-view />
     <van-tabbar v-model="active" fixed active-color="#f00">
       <van-tabbar-item name="home" to="home" :icon="active=='home'?'wap-home':'wap-home-o'">首页</van-tabbar-item>
-            <van-tabbar-item name="work" to="work" :icon="active=='friends'?'wap-home-o':'wap-home'">
+            <van-tabbar-item name="work" to="work" :icon="active=='work'?'wap-home-o':'wap-home'">
               <van-icon class="iconfont" class-prefix="icon" slot="icon" name="caidan"></van-icon>
               工作台
             </van-tabbar-item>
-      <van-tabbar-item name="our" to="my" :icon="active=='our'?icon.ourActiv:icon.our">我的</van-tabbar-item>
+      <van-tabbar-item name="my" to="my" :icon="active=='my'?icon.ourActiv:icon.our">我的</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
@@ -35,6 +35,10 @@
       // console.log(index);
       // this.$router.push(index)
       // },
+    },
+    mounted() {
+      console.log(this.$route.path);
+      this.active=this.$route.path.replace("/","");
     },
     components: {
       // HelloWorld,

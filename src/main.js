@@ -9,6 +9,8 @@ import {Button,Cell, CellGroup,Form ,Field,Toast,Tabbar,TabbarItem,Swipe, SwipeI
 Vue.use(Button).use(Cell).use(CellGroup).use(Form).use(Field).use(Toast).use(Tabbar).use(TabbarItem).use(Swipe).use(SwipeItem).use(Lazyload).use(Grid).use(GridItem).use(Popup).use(Area).use(Icon).use(NavBar).use(Search).use(List).use(PullRefresh).use(Checkbox).use(CheckboxGroup).use(Picker).use(Col).use(Row).use(Dialog)
 import './assets/icon/iconfont.css'
 import { Image as VanImage } from 'vant';
+import axios from 'axios'
+Vue.prototype.$axios = axios
 Vue.use(VanImage);
 
 Vue.config.productionTip = false

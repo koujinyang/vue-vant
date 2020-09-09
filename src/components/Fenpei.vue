@@ -11,19 +11,21 @@
         v-model="phoneNumber"
         placeholder="手机号"
         input-align="center"
+        shape="round"
+        background="#e8e8e8"
       />
-      <van-popup v-model="show" position="right" :style="{ width: '70%',height: '100%' }" >
+      <van-popup v-model="show" class="rightPopupBox" position="right" :style="{ width: '70%',height: '100%' }" >
         <div class="rightTittle">高级查询</div>
         <van-field v-model="areaName" type="text" label="省份"  placeholder="选择省份" @focus="chooseArea"/>
-        <van-field v-model="number" type="text" label="案源号"  placeholder="输入案源号"/>
+        <van-field v-model="AnYuanHao" type="text" label="案源号"  placeholder="输入案源号"/>
         <!-- 输入手机号，调起手机号键盘 -->
-        <van-field v-model="number" type="text" label="客户姓名"   placeholder="输入客户姓名"/>
+        <van-field v-model="userName" type="text" label="客户姓名"   placeholder="输入客户姓名"/>
         <!-- 允许输入正整数，调起纯数字键盘 -->
-        <van-field v-model="number" type="number" label="联系电话"   placeholder="输入联系电话"/>
+        <van-field v-model="gaoPhoneNumber" type="number" label="联系电话"   placeholder="输入联系电话"/>
         <!-- 允许输入数字，调起带符号的纯数字键盘 -->
-        <van-field v-model="number" type="text" label="人员分配"   placeholder="输入人员分配"/>
+        <van-field v-model="allocation" type="text" label="分配人员"   placeholder="输入人员分配"/>
         <!-- 输入密码 -->
-        <van-field v-model="number" type="text" label="辅办人员"   placeholder="输入辅办人员"/>
+        <van-field v-model="auxiliary" type="text" label="辅办人员"   placeholder="输入辅办人员"/>
         <div class="leftTittle">反馈状态</div>
         <van-row gutter="20" style="text-align: center;padding: 0 16px ;">
           <van-col span="8">
@@ -47,7 +49,7 @@
         </van-row>
         <van-row style="position: fixed;bottom: 0;width: 100%;">
           <van-col span="12"><van-button type="default" size="large" @click="reset">重置</van-button></van-col>
-          <van-col span="12"><van-button type="info" size="large" @click="save">确认</van-button></van-col>
+          <van-col span="12"><van-button type="info" size="large" color="#c30000" @click="save">确认</van-button></van-col>
         </van-row>
       </van-popup>
       <!--    <van-area title="选择省份" :area-list="areaList" value="110000" :columns-num="1" />-->
@@ -124,6 +126,11 @@
             show: false,
             showArea:false,
             areaName:"",
+            AnYuanHao:"",
+            userName:"",
+            gaoPhoneNumber:"",
+            allocation:"",
+            auxiliary:"",
             number:"",
             areaList:{
               province_list: {
@@ -273,6 +280,11 @@
         reset(){
           this.number="";
           this.areaName="";
+          this.AnYuanHao="";
+          this.userName="";
+          this.gaoPhoneNumber="";
+          this.allocation="";
+          this.auxiliary="";
           this.radioBox1State=0;
           this.radioBoxState=0;
         },
@@ -287,6 +299,10 @@
 </script>
 
 <style scoped>
+  .rightPopupBox .van-cell{
+    padding: 10px 16px;
+    font-size: 12px;
+  }
   .navBox >>>.van-nav-bar__text{
     color: #000000;
   }
@@ -294,7 +310,8 @@
     color: #000000;
   }
   .radioBox1{
-    background-color: rgba(255, 51, 0, 1);
+    color: rgb(255, 255, 255);
+    background: rgb(195, 0, 0);
     border-color: rgba(242, 242, 242, 1);
   }
   .radioBox{

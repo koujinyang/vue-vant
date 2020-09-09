@@ -1,5 +1,12 @@
 <template>
   <div class="hello">
+
+    <van-nav-bar
+      title="北京在明律师事务所案件管理系统"
+      fixed
+      placeholder
+      class="navBox"
+    />
     <!-- 登录页 用户表单 -->
     <div class="box" >
       <div style="text-align: center ;margin-bottom: 1rem;">
@@ -67,6 +74,7 @@
           return false;
         }
         else{
+          localStorage.setItem("lvshiIsLogin","yes");
           this.$toast.success('登录成功');
           this.$router.push({name:'Index'})
           // this.$toast('token='+token);
@@ -99,12 +107,17 @@
           // e.preventDefault();
         }
       },
+
     }
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+  .navBox >>>.van-nav-bar__text{
+    color: #000000;
+  }
   .van-field >>> .icon-mima,.icon-icon-user{
     font-size: 25px;
   }
