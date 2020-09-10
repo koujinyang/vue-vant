@@ -14,7 +14,9 @@ Vue.prototype.$axios = axios
 Vue.use(VanImage);
 
 Vue.config.productionTip = false
-
+window.addEventListener('popstate', function (e) {
+  router.isBack = true
+},false)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

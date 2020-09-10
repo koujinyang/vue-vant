@@ -1,7 +1,10 @@
 <template>
   <div class="home">
 <!--    <img src="../assets/images/homeActive.png" alt="">-->
-    <router-view />
+
+    <transition :name="transitionName">
+        <router-view class="Router"/>
+    </transition>
     <van-tabbar v-model="active" fixed active-color="#f00">
       <van-tabbar-item name="home" to="home" :icon="active=='home'?'wap-home':'wap-home-o'">首页</van-tabbar-item>
             <van-tabbar-item name="work" to="work" :icon="active=='work'?'wap-home-o':'wap-home'">
@@ -25,7 +28,8 @@
           home:'../assets/images/home.png',
           ourActiv:require('../assets/images/ourActive.png'),
           our:require('../assets/images/our.png'),
-        }
+        },
+        transitionName: 'slide-right', //初始过渡动画方向
       }
 
     },
@@ -40,6 +44,18 @@
       console.log(this.$route.path);
       this.active=this.$route.path.replace("/","");
     },
+    watch: {
+      $route(to, from) {
+        // 切换动画
+        let isBack = this.$router.isBack // 监听路由变化时的状态为前进还是后退
+        if (isBack) {
+          this.transitionName = 'slide-left'
+        } else {
+          this.transitionName = 'slide-right'
+        }
+        this.$router.isBack = false
+      }
+    },
     components: {
       // HelloWorld,
 
@@ -47,6 +63,28 @@
   };
 </script>
 <style scoped>
+  .Router {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    transition: all .377s ease;
+    will-change: transform;
+    top: 0;
+    backface-visibility: hidden;
+    perspective: 1000;
+  }
+  .slide-left-enter,
+  .slide-right-leave-active {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  .slide-left-leave-active,
+  .slide-right-enter {
+    opacity: 0;
+    transform: translate3d(100%, 0 ,0);
+  }
+
   .van-tabbar-item >>> .icon-caidan{
     font-size: 0.8rem;
   }
