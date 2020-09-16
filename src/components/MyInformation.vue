@@ -45,16 +45,30 @@
         name: "MyInformation",
       data(){
           return{
-            user:"admin",
-            name:"张三",
-            phone:"15500000000",
-            email:"12232425@163.com"
+            user:"",
+            name:"",
+            phone:"",
+            email:"@163.com"
           }
       },
       methods: {
+        getUserData(){
+          let that=this;
+          that.fetchPost("restApi/mobile/myinfo",{}).then((res)=>{
+            that.name=res.data.data.name;
+            that.user=res.data.data.account;
+            that.phone=res.data.data.phone;
+            that.email=res.data.data.email;
+          }).catch(
+
+          )
+        },
         onClickLeft() {
           this.$router.go(-1)
         },
+      },
+      mounted() {
+          this.getUserData()
       }
     }
 </script>

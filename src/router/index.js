@@ -54,7 +54,7 @@ export default new Router({
       component: SetFuban
     },
     {
-      path: '/myInformation/:id',
+      path: '/myInformation',
       name: 'MyInformation',
       component: MyInformation
     }

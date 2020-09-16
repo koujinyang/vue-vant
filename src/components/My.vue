@@ -11,12 +11,12 @@
           <span class="icon iconfont icon-yonghu1"></span>
         </van-col>
         <van-col span="12">
-          <div class="nameBox">管理员</div>
-          <div class="userBox">admin</div>
+          <div class="nameBox">{{name}}</div>
+          <div class="userBox">{{account}}</div>
         </van-col>
       </van-row>
       <van-cell-group style="margin-top: 20px;">
-        <van-cell title="我的资料" is-link :to="`/myInformation/${id}`">
+        <van-cell title="我的资料" is-link :to="`/myInformation`">
           <template #icon>
             <van-icon class="iconfont" class-prefix="icon" slot="left-icon" name="icon-user"></van-icon>
           </template>
@@ -42,15 +42,30 @@
         name: "My",
       data(){
           return{
-            id:"1"
+            id:"1",
+            name:"",
+            account:""
+
           }
       },
       methods:{
+        getUserData(){
+          let that=this;
+          that.fetchPost("restApi/mobile/myinfo",{}).then((res)=>{
+            console.log(res);
+            console.log(res);
+            that.name=res.data.data.name;
+            that.account=res.data.data.account;
+          }).catch(
+
+          )
+        },
         goLogin(){
           this.$dialog.confirm({
             message: '确定退出当前账号？',
           }) .then(() => {
             // on confirm
+            localStorage.setItem("access_token", "");
             this.$router.push({ path:'/login'});
           })
             .catch(() => {
@@ -59,6 +74,7 @@
         },
       },
       mounted() {
+          this.getUserData();
 
       }
     }

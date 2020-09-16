@@ -161,6 +161,33 @@
       }
       },
       methods:{
+        getAnyuanData(){
+          let that=this;
+          that.fetchPost("restApi/mobile/detail",{caseId:this.$route.params.id}).then((res)=>{
+            console.log(res);
+
+
+            that.anyuanData.id=res.data.data.data.caseId
+            that.anyuanData.name=res.data.data.data.customerName
+            that.anyuanData.AnYuanHao=res.data.data.data.caseCode
+            that.anyuanData.AnYuanJieShao=res.data.data.data.caseCode
+
+            // anyuanData:{
+            //   id:1,
+            //     name:"张三",
+            //     AnYuanHao:'2020082900000',
+            //     AnYuanJieShao:"案源介绍,安源介绍",
+            //     AnYanType:'A',
+            //     phoneNumber:"15900000000",
+            //     rovince:"北京",
+            //     userArea:"海淀",
+            //     allocation:"张三律师",
+            //     auxiliary:"李四助理"
+            // }
+          }).catch(
+
+          )
+        },
         onClickLeft() {
           this.$router.go(-1)
         },
@@ -171,6 +198,7 @@
       },
       mounted() {
         console.log(this.$route.params.id);
+        this.getAnyuanData();
       }
     }
 </script>

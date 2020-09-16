@@ -19,7 +19,7 @@
             @click="toggle(index)"
           >
             <template #right-icon>
-              <van-checkbox :name="item.name"  ref="checkboxes" ></van-checkbox>
+              <van-checkbox :name="item.id"  ref="checkboxes" ></van-checkbox>
             </template>
           </van-cell>
         </van-cell-group>
@@ -35,11 +35,24 @@
         name: "SetFuban",
       data() {
         return {
-          list: [{id:1,name:'张三'},{id:2,name: '李四'} ],
+          list: [],
           result: [],
         };
       },
       methods:{
+        getDeptData(){
+          let that=this;
+          that.fetchPost("restApi/mobile/getUserByDept",{caseId:this.$route.params.id}).then((res)=>{
+            console.log(res);
+            var personList=res.data.data.data;
+            for(var i=0;i<personList.length;i++){
+              that.list.push({id:personList[i].userId,name:personList[i].name})
+            }
+
+          }).catch(
+
+          )
+        },
         onClickLeft() {
           this.$router.go(-1)
         },
@@ -48,11 +61,25 @@
         },
         saveName(){
           console.log(this.result);
-          this.$router.go(-1);
+          let that=this;
+          that.fetchPost("restApi/mobile/batchAddAssitLawyer",{caseIds:this.$route.params.id,attorney:that.result.toString()}).then((res)=>{
+            console.log(res);
+            if(res.data.code==200){
+              this.$toast("设置辅办成功");
+            }else {
+              this.$toast(res.data.message);
+            }
+
+            this.$router.go(-1);
+          }).catch(
+
+          )
+
         }
       },
       mounted() {
         console.log(this.$route.params.id);
+        this.getDeptData()
       }
     }
 </script>

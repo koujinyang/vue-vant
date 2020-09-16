@@ -10,28 +10,28 @@
   <div class="myDistribution">我的分配</div>
   <van-grid :column-num='3'>
     <van-grid-item    @click="toFeipei(2)">
-      <div class="textNumber">15</div>
+      <div class="textNumber">{{NotReplyCount}}</div>
       <div>待反馈</div>
     </van-grid-item>
-    <van-grid-item   @click="toFeipei(4)">
-      <div class="textNumber">10</div>
-      <div>待设置辅办</div>
+    <van-grid-item   @click="toFeipei(3)">
+      <div class="textNumber">{{NotProcessCount}}</div>
+      <div>待处理</div>
     </van-grid-item>
-    <van-grid-item   @click="toFeipei(5)">
-      <div class="textNumber">10</div>
+    <van-grid-item   @click="toFeipei(4)">
+      <div class="textNumber">{{IsContract}}</div>
       <div>已签合同</div>
     </van-grid-item>
-    <van-grid-item   @click="toFeipei(6)">
-      <div class="textNumber">10</div>
+    <van-grid-item   @click="toFeipei(5)">
+      <div class="textNumber">{{todayassign}}</div>
       <div>今日分配</div>
     </van-grid-item>
-    <van-grid-item   @click="toFeipei(7)">
-      <div class="textNumber">10</div>
+    <van-grid-item   @click="toFeipei(6)">
+      <div class="textNumber">{{monthassign}}</div>
       <div>本月分配</div>
     </van-grid-item>
-    <van-grid-item   @click="toFeipei(8)">
-      <div class="textNumber">10</div>
-      <div>本年分配</div>
+    <van-grid-item   @click="toFeipei(1)">
+      <div class="textNumber">{{AllCount}}</div>
+      <div>全部数量</div>
     </van-grid-item>
 <!--    <van-grid-item  text="我的分配" @click="toFeipei">-->
 <!--      <van-icon class="iconfont" class-prefix="icon" slot="icon" name="woderenwu"></van-icon>-->
@@ -64,13 +64,41 @@
 <script>
     export default {
         name: "Work",
+      data(){
+        return{
+          NotReplyCount:"",
+          NotProcessCount:"",
+          IsContract:"",
+          todayassign:"",
+          monthassign:"",
+          AllCount:"",
+        }
+      },
       methods:{
+        getData(){
+
+          let that=this;
+          that.fetchPost("restApi/mobile/workbench",{}).then((res)=>{
+            console.log(res);
+            that.NotReplyCount=res.data.data.NotReplyCount;
+            that.NotProcessCount=res.data.data.NotProcessCount;
+            that.IsContract=res.data.data.IsContract;
+            that.todayassign=res.data.data.todayassign;
+            that.monthassign=res.data.data.monthassign;
+            that.AllCount=res.data.data.AllCount;
+          }).catch(
+
+          )
+        },
 
         toFeipei(id){
           this.$router.push({
             path: `/Fenpei/${id}`,
           })
         },
+      },
+      mounted() {
+        this.getData();
       }
     }
 </script>

@@ -49,6 +49,8 @@
 <script>
   // import axios from 'axios'
   // const token = '123456';
+
+  let Base64 = require('js-base64').Base64
   export default {
     name: 'Login',
     data () {
@@ -74,11 +76,21 @@
           return false;
         }
         else{
-          localStorage.setItem("lvshiIsLogin","yes");
-          this.$toast.success('登录成功');
-          this.$router.push({name:'Index'})
-          // this.$toast('token='+token);
-          // var that=this // 放置指针，便于then操作的获取
+          var that=this // 放置指针，便于then操作的获取
+          let dateTime=new Date();
+          let nonce =dateTime.getTime();
+          that.fetchGet('restApi/mobile/Login',{username:that.username,"password":Base64.encode(that.password+nonce)}).then((res) => {
+            console.log(res);
+            if(res.data.code==200){
+              localStorage.setItem("access_token", res.data.data.access_token);
+              this.$router.push({ path:'/index'})
+            }else {
+              this.$toast(res.data.message);
+            }
+
+          }).catch(
+
+          )
           //
           // axios.get('接口地址', {
           //     params: {

@@ -10,7 +10,14 @@ Vue.use(Button).use(Cell).use(CellGroup).use(Form).use(Field).use(Toast).use(Tab
 import './assets/icon/iconfont.css'
 import { Image as VanImage } from 'vant';
 import axios from 'axios'
+import {fetchGet, fetchPost} from './https'
+import cryptoJs from 'crypto-js'
+import md5 from 'js-md5';
+Vue.prototype.$md5 = md5;
+Vue.prototype.$cryptoJs = cryptoJs;
 Vue.prototype.$axios = axios
+Vue.prototype.fetchGet = fetchGet
+Vue.prototype.fetchPost = fetchPost
 Vue.use(VanImage);
 
 Vue.config.productionTip = false
