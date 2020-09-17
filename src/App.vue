@@ -35,7 +35,7 @@ export default {
 <style>
   html,body{
     height: 100%;
-    background-color: #e8e8e8;
+    background-color: #f9f9f9;
   }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

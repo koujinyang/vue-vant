@@ -16,25 +16,26 @@
     <van-image
       width="100%"
       lazy-load
-      src="https://img.yzcdn.cn/vant/apple-1.jpg"
+      class="indexImg"
+      :src="indexImg"
     />
       <div class="myDistribution">我的分配</div>
 
     <van-grid :column-num='3'>
-      <van-grid-item    @click="toFeipei(2)">
+      <van-grid-item class="gridBox"   @click="toFeipei(2)">
         <div class="textNumber">{{NotReplyCount}}</div>
-        <div>待反馈</div>
+        <div class="gardText">待反馈</div>
       </van-grid-item>
       <van-grid-item   @click="toFeipei(3)">
         <div class="textNumber">{{NotProcessCount}}</div>
-        <div>待处理</div>
+        <div class="gardText">待处理</div>
       </van-grid-item>
 <!--      <van-grid-item  text="我的分配" @click="toFeipei(1)">-->
 <!--        <van-icon class="iconfont" class-prefix="icon" slot="icon" name="woderenwu"></van-icon>-->
 <!--      </van-grid-item>-->
       <van-grid-item   @click="toFeipei(1)">
         <div class="textNumber">{{AllCount}}</div>
-        <div>我的分配</div>
+        <div class="gardText">我的分配</div>
       </van-grid-item>
     </van-grid>
 
@@ -48,10 +49,7 @@
     name: "Home",
     data() {
       return {
-        images: [
-          'https://img.yzcdn.cn/vant/apple-1.jpg',
-          'https://img.yzcdn.cn/vant/apple-2.jpg',
-        ],
+        indexImg:require('../assets/images/tu-1.png'),
         NotReplyCount:"",
         NotProcessCount:"",
         AllCount:"",
@@ -84,6 +82,13 @@
 </script>
 
 <style scoped>
+  .gridBox{
+    height: 172px;
+  }
+  .indexImg{
+    width: 100%;
+    /*height: 320px;*/
+  }
   .navBox >>> .van-ellipsis{
     font-weight: 600;
     font-size: 20px;
@@ -101,13 +106,24 @@
     color: #ff0000;
   }
   .myDistribution{
-    font-size: 0.55rem;
-    line-height: 1rem;
+    font-size: 24px;
+    line-height: 62px;
+    color: #5c5c5c;
     /*background-color: #cccccc;*/
-    padding: 0 0.2rem;
+    padding: 0 30px;
   }
   .textNumber{
-    font-size: 0.8rem;
-    color: #ff0000;
+    font-size: 34px;
+    color: #d51927;
+  }
+  .gardText{
+    margin-top: 10px;
+    font-size: 20px;
+    color: #5c5c5c;
+  }
+</style>
+<style>
+  .van-grid-item__content::after{
+    border-width: 0 2px 1px 0;
   }
 </style>

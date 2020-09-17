@@ -3,7 +3,8 @@
       <div class="box">
 
         <div style="text-align: center">
-          <span class="icon iconfont icon-yonghu1"></span>
+<!--          <span class="icon iconfont icon-yonghu1"></span>-->
+          <van-image  class="logoImgs" :src="logo" />
         </div>
         <div class="userName">北京在明律师事务所</div>
         <div class="systemBox">案件管理系统</div>
@@ -14,6 +15,11 @@
 <script>
     export default {
         name: "Start",
+      data(){
+        return{
+          logo:require('../assets/images/logo.png')
+        }
+      },
       methods:{
       },
       mounted() {
@@ -31,20 +37,28 @@
 </script>
 
 <style scoped>
+  .logoImgs{
+    width: 105px;
+    height: 165px;
+  }
   .userName{
+    margin-top: 70px;
+    color: #5a5962;
     text-align: center;
-    font-size: 55px;
+    font-size: 40px;
     font-weight: 700;
-    line-height: 1.3rem;
+    /*line-height: 1.3rem;*/
   }
   .systemBox{
+    margin-top: 24px;
     text-align: center;
-    font-size: 50px;
-    color: #cccccc;
-    line-height: 1.3rem;
+    font-size: 30px;
+    color: #5c5c5c;
+    /*line-height: 1.3rem;*/
   }
 .innerBox{
   height: 100%;
+  background-color: #ffffff;
 }
 .box{
   position: absolute;

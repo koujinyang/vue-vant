@@ -11,10 +11,10 @@ import './assets/icon/iconfont.css'
 import { Image as VanImage } from 'vant';
 import axios from 'axios'
 import {fetchGet, fetchPost} from './https'
-import cryptoJs from 'crypto-js'
+// import cryptoJs from 'crypto-js'
 import md5 from 'js-md5';
 Vue.prototype.$md5 = md5;
-Vue.prototype.$cryptoJs = cryptoJs;
+// Vue.prototype.$cryptoJs = cryptoJs;
 Vue.prototype.$axios = axios
 Vue.prototype.fetchGet = fetchGet
 Vue.prototype.fetchPost = fetchPost
