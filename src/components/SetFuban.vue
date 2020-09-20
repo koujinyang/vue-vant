@@ -8,7 +8,7 @@
         @click-left="onClickLeft"
         class="navBox"
       />
-      <van-cell title="选择辅办人员" />
+      <van-cell title="选择辅办人员" class="noBottom"/>
       <van-checkbox-group v-model="result">
         <van-cell-group>
           <van-cell
@@ -18,14 +18,17 @@
             :title="` ${item.name}`"
             @click="toggle(index)"
           >
-            <template #right-icon>
-              <van-checkbox :name="item.id"  ref="checkboxes" ></van-checkbox>
+            <template #icon>
+              <van-checkbox :name="item.id" icon-size="0.5rem" checked-color="#d51927" ref="checkboxes" class="checkboxBox"></van-checkbox>
+            </template>
+            <template #title>
+              <div class="setFubanName">{{item.name}}</div>
             </template>
           </van-cell>
         </van-cell-group>
       </van-checkbox-group>
       <div style="text-align: center; margin-top: 20px;padding: 0 20px;">
-        <van-button color="#c30000"  size="small" @click="saveName">保存</van-button>
+        <van-button color="#d51927"  size="small" @click="saveName">保存</van-button>
       </div>
     </div>
 </template>
@@ -85,14 +88,24 @@
 </script>
 
 <style scoped>
-
+  .setFubanName{
+    font-size: 20px;
+  }
+  .checkboxBox{
+    margin-right: 20px;
+  }
+  .noBottom::after{
+    border: none;
+  }
   .van-button--small{
     padding: 0 15px;
   }
-  .navBox >>>.van-nav-bar__text{
-    color: #000000;
+  .navBox >>> .van-nav-bar__title{
+    color: #5c5c5c;
+    font-size: 0.2667rem;
+    font-weight: 600;
   }
   .navBox >>>.van-icon-arrow-left{
-    color: #000000;
+    color: #5c5c5c;
   }
 </style>

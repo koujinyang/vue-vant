@@ -17,25 +17,57 @@
       label="账号"
       input-align="right"
       readonly
-    />
+      class="noBottom"
+    >
+      <template #label>
+        <span class="anyuanLabel">账号:</span>
+      </template>
+      <template #input>
+        <span class="anyuanLabel">{{user}}</span>
+      </template>
+    </van-field>
     <van-field
       v-model="name"
       label="姓名"
       input-align="right"
       readonly
-    />
+      class="noBottom"
+    >
+      <template #label>
+        <span class="anyuanLabel">姓名:</span>
+      </template>
+      <template #input>
+        <span class="anyuanLabel">{{name}}</span>
+      </template>
+    </van-field>
     <van-field
       v-model="phone"
       label="电话"
       input-align="right"
       readonly
-    />
+      class="noBottom"
+    >
+      <template #label>
+        <span class="anyuanLabel">电话:</span>
+      </template>
+      <template #input>
+        <span class="anyuanLabel">{{phone}}</span>
+      </template>
+    </van-field>
     <van-field
       v-model="email"
       label="邮箱"
       input-align="right"
       readonly
-    />
+      class="noBottom"
+    >
+      <template #label>
+        <span class="anyuanLabel">邮箱:</span>
+      </template>
+      <template #input>
+        <span class="anyuanLabel">{{email}}</span>
+      </template>
+    </van-field>
   </van-cell-group>
 </div>
 </template>
@@ -75,8 +107,23 @@
 
 <style scoped>
 
+  .noBottom{
+    padding: 10px 32px;
+  }
+  .noBottom::after{
+    border: none;
+  }
+  .anyuanLabel{
+    font-size: 20px;
+    color: #5c5c5c;
+  }
+  .navBox >>> .van-nav-bar__title{
+    color: #5c5c5c;
+    font-size: 0.2667rem;
+    font-weight: 600;
+  }
   .navBox >>>.van-icon-arrow-left{
-    color: #000000;
+    color: #5c5c5c;
   }
   .icon-yonghu1{
     font-size: 2rem;

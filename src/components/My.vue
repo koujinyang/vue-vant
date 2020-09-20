@@ -15,22 +15,22 @@
           <div class="userBox">{{account}}</div>
         </van-col>
       </van-row>
-      <van-cell-group style="margin-top: 20px;">
-        <van-cell title="我的资料" is-link :to="`/myInformation`">
+      <van-cell-group style="margin-top: 0.267rem;">
+        <van-cell title="我的资料" is-link :to="`/myInformation`" title-class="myCellTitle">
           <template #icon>
             <van-icon class="iconfont" class-prefix="icon" slot="left-icon" name="icon-user"></van-icon>
           </template>
         </van-cell>
-        <van-cell title="版本号" value="v1.0"  >
+        <van-cell title="版本号" value="v1.0"   title-class="myCellTitle">
           <template #icon>
 
             <van-icon class="iconfont" class-prefix="icon" slot="left-icon" name="banben"></van-icon>
           </template>
         </van-cell>
       </van-cell-group>
-      <div style="position: fixed;bottom: 60px;width: 100%;">
-        <div style="padding: 0 15px;">
-          <van-button type="info" size="large" color="#c30000" @click="goLogin">退出账号</van-button>
+      <div style="" class="bottomBox">
+        <div style="" class="bottomBox1">
+          <van-button type="info" size="large" class="bottomBoxButton" color="#d51927" @click="goLogin">退出账号</van-button>
         </div>
 
       </div>
@@ -81,32 +81,54 @@
 </script>
 
 <style scoped>
+  .myCellTitle{
+    font-size: 20px;
+    color: #5c5c5c;
+  }
+  .bottomBoxButton{
+    border-radius: 8px;
+    font-size: 24px;
+  }
+  .bottomBox{
+    position: fixed;
+    bottom: 120px;
+    width: 100%;
+  }
+  .bottomBox1{
+    padding: 0 20px;
+  }
   .navBox >>> .van-ellipsis{
     font-weight: 600;
     font-size: 20px;
   }
   .van-cell >>> .icon-icon-user,.icon-banben{
-    font-size: 20px;
-    color: #cccccc;
+    font-size: 0.6rem;
     margin-right: 7px;
+    color: #5c5c5c;
   }
   .userTop{
     padding: 30px 0;
     background-color: #ffffff;
   }
 .nameBox{
-  margin-top: 0.7rem;
-  font-size: 0.5rem;
-  line-height: 0.8rem;
+  margin-top: 0.6rem;
+  font-size: 0.35rem;
+  line-height: 0.5rem;
+  margin-left: 20px;
+  color: #999999;
 }
 .userBox{
-  font-size: 0.45rem;
+  font-size: 0.25rem;
   line-height: 0.7rem;
   color: #cccccc;
+  margin-left: 20px;
 }
   .icon-yonghu1{
-    font-size: 2.7rem;
-    color: #cccccc;
+    /*height: 1.47rem;*/
+    /*width: 1.47rem;*/
+    /*display: inline-block;*/
+    font-size: 2.04rem;
+    color: #999999;
     text-align: center;
     margin: 0 auto;
   }

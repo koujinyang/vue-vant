@@ -9,29 +9,29 @@
   />
   <div class="myDistribution">我的分配</div>
   <van-grid :column-num='3'>
-    <van-grid-item    @click="toFeipei(2)">
+    <van-grid-item  class="gridBox"  @click="toFeipei(2)">
       <div class="textNumber">{{NotReplyCount}}</div>
-      <div>待反馈</div>
+      <div class="gardText">待反馈</div>
     </van-grid-item>
-    <van-grid-item   @click="toFeipei(3)">
+    <van-grid-item class="gridBox"  @click="toFeipei(3)">
       <div class="textNumber">{{NotProcessCount}}</div>
-      <div>待处理</div>
+      <div class="gardText">待处理</div>
     </van-grid-item>
-    <van-grid-item   @click="toFeipei(4)">
+    <van-grid-item class="gridBox"  @click="toFeipei(4)">
       <div class="textNumber">{{IsContract}}</div>
-      <div>已签合同</div>
+      <div class="gardText">已签合同</div>
     </van-grid-item>
-    <van-grid-item   @click="toFeipei(5)">
+    <van-grid-item class="gridBox"  @click="toFeipei(5)">
       <div class="textNumber">{{todayassign}}</div>
-      <div>今日分配</div>
+      <div class="gardText">今日分配</div>
     </van-grid-item>
-    <van-grid-item   @click="toFeipei(6)">
+    <van-grid-item class="gridBox"  @click="toFeipei(6)">
       <div class="textNumber">{{monthassign}}</div>
-      <div>本月分配</div>
+      <div class="gardText">本月分配</div>
     </van-grid-item>
-    <van-grid-item   @click="toFeipei(1)">
+    <van-grid-item class="gridBox"  @click="toFeipei(1)">
       <div class="textNumber">{{AllCount}}</div>
-      <div>全部数量</div>
+      <div class="gardText">全部数量</div>
     </van-grid-item>
 <!--    <van-grid-item  text="我的分配" @click="toFeipei">-->
 <!--      <van-icon class="iconfont" class-prefix="icon" slot="icon" name="woderenwu"></van-icon>-->
@@ -41,21 +41,23 @@
   <div class="myDistribution">我的台账</div>
 
   <van-grid :column-num='3'>
-    <van-grid-item    >
+    <van-grid-item   class="gridBox" >
       <div class="textNumber">15,000</div>
-      <div>代开票金额</div>
+      <div class="gardText">代开票金额</div>
     </van-grid-item>
-    <van-grid-item   >
+    <van-grid-item   class="gridBox">
       <div class="textNumber">15,000</div>
-      <div>本月收入</div>
+      <div class="gardText">本月收入</div>
     </van-grid-item>
 <!--    <van-grid-item    @click="toFeipei">-->
 <!--      <div class="textNumber">15,000</div>-->
 <!--      <div>敬请期待</div>-->
 <!--    </van-grid-item>-->
 
-        <van-grid-item  text="敬请期待">
+        <van-grid-item class="gridBox" text="敬请期待">
           <van-icon class="iconfont" class-prefix="icon" slot="icon" name="ziyuanldpi"></van-icon>
+
+<!--          <div class="gardText">敬请期待</div>-->
         </van-grid-item>
   </van-grid>
 </div>
@@ -104,25 +106,36 @@
 </script>
 
 <style scoped>
-
+  .gridBox >>> .van-grid-item__content::after{
+    border-width: 0 2px 2px 0;
+  }
+  .gridBox{
+    height: 172px;
+  }
   .navBox >>> .van-ellipsis{
     font-weight: 600;
     font-size: 20px;
   }
   .myDistribution{
-    font-size: 0.55rem;
-    line-height: 1.2rem;
+    font-size: 24px;
+    line-height: 62px;
+    color: #5c5c5c;
     /*background-color: #cccccc;*/
-    padding: 0 0.2rem;
+    padding: 0 30px;
   }
 
   .textNumber{
-    font-size: 0.8rem;
-    color: #ff0000;
+    font-size: 34px;
+    color: #d51927;
+  }
+
+  .gardText{
+    margin-top: 10px;
+    font-size: 20px;
+    color: #5c5c5c;
   }
   .icon-ziyuanldpi{
-
-    font-size: 0.8rem;
-    color: #ff0000;
+    font-size: 0.5rem;
+    color: #d51927;
   }
 </style>

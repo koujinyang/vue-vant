@@ -12,7 +12,10 @@
         placeholder="手机号"
         input-align="center"
         shape="round"
-        background="#e8e8e8"
+
+        class="searchBox"
+        @input="numValid('phoneNumber')"
+        @search="searchByNumber"
       />
       <van-popup v-model="show" class="rightPopupBox" position="right" :style="{ width: '70%',height: '100%' }" >
         <div class="rightTittle">高级查询</div>
@@ -21,23 +24,23 @@
         <!-- 输入手机号，调起手机号键盘 -->
         <van-field v-model="userName" type="text" label="客户姓名"   placeholder="输入客户姓名"/>
         <!-- 允许输入正整数，调起纯数字键盘 -->
-        <van-field v-model="gaoPhoneNumber" type="number" label="联系电话"   placeholder="输入联系电话"/>
+        <van-field v-model="phoneNumber" type="number" label="联系电话"   placeholder="输入联系电话"/>
         <!-- 允许输入数字，调起带符号的纯数字键盘 -->
         <van-field v-model="allocation" type="text" label="分配人员"   placeholder="输入人员分配"/>
         <!-- 输入密码 -->
         <van-field v-model="auxiliary" type="text" label="辅办人员"   placeholder="输入辅办人员"/>
         <div class="leftTittle">反馈状态</div>
-<!--        <van-row gutter="20" style="text-align: center;padding: 0 16px ;">-->
-<!--          <van-col span="8">-->
-<!--            <span class="radioBox" :class="radioBoxState==1?'radioBox1':''" @click="changeState(1)" >未反馈</span>-->
-<!--          </van-col>-->
-<!--          <van-col span="8">-->
-<!--            <span class="radioBox" :class="radioBoxState==2?'radioBox1':''" @click="changeState(2)" >有效</span>-->
-<!--          </van-col>-->
-<!--          <van-col span="8">-->
-<!--            <span class="radioBox" :class="radioBoxState==3?'radioBox1':''" @click="changeState(3)" >无效</span>-->
-<!--          </van-col>-->
-<!--        </van-row>-->
+        <van-row gutter="20" style="text-align: center;padding: 0 16px ;">
+          <van-col span="8">
+            <span class="radioBox" :class="radioBoxState==1?'radioBox1':''" @click="changeState(1)" >未反馈</span>
+          </van-col>
+          <van-col span="8">
+            <span class="radioBox" :class="radioBoxState==2?'radioBox1':''" @click="changeState(2)" >有效</span>
+          </van-col>
+          <van-col span="8">
+            <span class="radioBox" :class="radioBoxState==3?'radioBox1':''" @click="changeState(3)" >无效</span>
+          </van-col>
+        </van-row>
         <div class="leftTittle">辅办状态</div>
         <van-row gutter="20" style="text-align: center;padding: 0 16px ;">
           <van-col span="8">
@@ -63,29 +66,37 @@
         <van-list
           v-model="loading"
           :finished="finished"
-          finished-text="没有跟多数据了"
+          finished-text="没有更多数据了"
           @load="onLoad"
         >
 <!--          <div v-if="list.length==0" class="noMessage">无数据</div>-->
           <van-checkbox-group v-model="result">
-            <van-cell-group>
+            <van-cell-group class="fenpeiListBox1">
               <van-cell
                 v-for="(item, index) in list"
                 clickable
                 :key="item.id"
                 :title=" item.name"
                 center
+                class="fenpeiListBox"
               >
+                <template #title>
+                  <div class="fenpeiListTitle">{{item.name}}</div>
+                </template>
                 <template #label>
-                  <div @click="toAnyuan(item.id)">
-                    <van-field v-model="item.AnYuanHao"  label-width="3rem" label="案源号：" input-align="right" readonly/>
-                    <van-field v-model="item.phoneNumber"  label-width="3rem" label="主联系电话：" input-align="right" readonly/>
-                    <van-field v-model="item.rovince"  label-width="3rem" label="省份：" input-align="right" readonly/>
-                    <van-field v-model="item.userArea"  label-width="3rem" label="客户区域：" input-align="right" readonly/>
-                    <van-field v-model="item.allocation"  label-width="3rem" label="分配人员：" input-align="right" readonly/>
-                    <van-field v-model="item.auxiliary"  label-width="3rem" label="辅办人员：" input-align="right" readonly/>
+                  <div >
+                    <van-field @click="toAnyuan(item.id)"  v-model="item.AnYuanHao"  label-width="3rem" label="案源号：" input-align="right" readonly/>
+                    <van-field  v-model="item.phoneNumber"  label-width="3rem" label="主联系电话：" input-align="right" readonly>
+                      <template #input>
+                        <a :href="'tel:' + item.phoneNumber" class="telBox">{{item.phoneNumber+"(点击呼出)"}}</a>
+                      </template>
+                    </van-field>
+                    <van-field @click="toAnyuan(item.id)"  v-model="item.rovince"  label-width="3rem" label="省份：" input-align="right" readonly/>
+                    <van-field @click="toAnyuan(item.id)"  v-model="item.userArea"  label-width="3rem" label="客户区域：" input-align="right" readonly/>
+                    <van-field @click="toAnyuan(item.id)"  v-model="item.allocation"  label-width="3rem" label="分配人员：" input-align="right" readonly/>
+                    <van-field @click="toAnyuan(item.id)"  v-model="item.auxiliary"  label-width="3rem" label="辅办人员：" input-align="right" readonly/>
                   </div>
-                  <div class="setFuban" v-show="result.length==0&&item.mainLawyer"><van-button color="#c30000"  size="small"   @click.stop.prevent="choosePerson(item.id)">设置辅办</van-button></div>
+                  <div class="setFuban" v-show="result.length==0&&item.mainLawyer"><van-button color="#d51927"  size="small"   @click.stop.prevent="choosePerson(item.id)">设置辅办</van-button></div>
                 </template>
                 <template #icon >
                   <van-checkbox :name="item.id" ref="checkboxes"   @click="choosePersons"/>
@@ -98,7 +109,7 @@
           </van-checkbox-group>
         </van-list>
       </van-pull-refresh>
-      <div class="setFuban1" v-show="result.length>0"><van-button color="#c30000"  size="small"    @click.stop.prevent="choosePerson1()">设置辅版</van-button></div>
+      <div class="setFuban1" v-show="result.length>0"><van-button color="#d51927"  size="small"    @click.stop.prevent="choosePerson1()">设置辅版</van-button></div>
 
     </div>
 </template>
@@ -197,7 +208,7 @@
           this.showArea = false
           this.$refs.myArea.reset()// 重置城市列表
         },
-        onLoad(parmas) {
+        onLoad() {
           let that=this;
           that.page++;
           if (this.refreshing) {
@@ -219,43 +230,79 @@
           }else if(that.$route.params.id==6){
             querytype = "MonthAssign"
           }
-          if(!parmas){
-            that.fetchPost("restApi/mobile/myassignlistbytype",{},{querytype:querytype,limit:5,page:that.page}).then((res)=>{
-              var dataList=res.data.data.data;
-              for (let i = 0; i < dataList.length; i++) {
-                that.list.push({
-                  id:dataList[i].caseId,
-                  name:dataList[i].customerName,
-                  AnYuanHao:dataList[i].caseCode,
-                  phoneNumber:dataList[i].customerTel0,
-                  rovince:dataList[i].cusotmerProvince,
-                  userArea:dataList[i].cusotmerArea,
-                  allocation:dataList[i].distributionName,
-                  auxiliary:dataList[i].assistLawyer,
-                  mainLawyer:dataList[i].mainLawyer
-                });
-              }
-              if (dataList.length == 0) {
-                this.finished = true;
-              }
-
-              this.loading = false;
-              // for (let i = 0; i < 10; i++) {
-              //   this.list.push({
-              //     id: this.list.length + 1,
-              //     name: "张三",
-              //     AnYuanHao: '2020082900000',
-              //     phoneNumber: "15900000000",
-              //     rovince: "北京",
-              //     userArea: "海淀",
-              //     allocation: "张三、李四",
-              //     auxiliary: "王五"
-              //   });
-              // }
-            }).catch()
-          }else {
-
+          var distributionStatus;
+          if(that.radioBoxState==0){
+            distributionStatus="";
+          }else if(that.radioBoxState==1){
+            distributionStatus="未反馈";
+          }else if(that.radioBoxState==2){
+            distributionStatus="有效";
+          }else if(that.radioBoxState==3){
+            distributionStatus="无效";
           }
+          var data={};
+          // if(!parmas){
+          //   data={
+          //     querytype:querytype
+          //   }
+          // }else {
+          //   data=parmas;
+          //   data.querytype=querytype;
+          // }
+          data.querytype=querytype;
+          data.customerTel0=that.phoneNumber;
+          data.cusotmerProvince=that.areaName;
+          data.caseCode=that.AnYuanHao;
+          data.customerName=that.userName;
+          data.attorney=that.allocation;
+          data.assistLawyer=that.auxiliary;
+          data.distributionStatus=distributionStatus;
+          var radioBox1State;
+          if(that.radioBox1State==0){
+            radioBox1State="";
+          }else if(that.radioBox1State==1){
+            radioBox1State=1;
+          }else if(that.radioBox1State==2){
+            radioBox1State=0;
+          }
+          data.assistState=radioBox1State;
+          that.fetchPost("restApi/mobile/myassignlist",data,{limit:5,page:that.page}).then((res)=>{
+            var dataList=res.data.data.data;
+            if(that.page==1){
+              that.list=[];
+            }
+            for (let i = 0; i < dataList.length; i++) {
+              that.list.push({
+                id:dataList[i].caseId,
+                name:dataList[i].customerName,
+                AnYuanHao:dataList[i].caseCode,
+                phoneNumber:dataList[i].customerTel0,
+                rovince:dataList[i].cusotmerProvince,
+                userArea:dataList[i].cusotmerArea,
+                allocation:dataList[i].distributionName,
+                auxiliary:dataList[i].assistLawyer,
+                mainLawyer:dataList[i].mainLawyer
+              });
+            }
+            if (dataList.length == 0) {
+              this.finished = true;
+            }
+
+            this.loading = false;
+            // for (let i = 0; i < 10; i++) {
+            //   this.list.push({
+            //     id: this.list.length + 1,
+            //     name: "张三",
+            //     AnYuanHao: '2020082900000',
+            //     phoneNumber: "15900000000",
+            //     rovince: "北京",
+            //     userArea: "海淀",
+            //     allocation: "张三、李四",
+            //     auxiliary: "王五"
+            //   });
+            // }
+          }).catch()
+
         },
         onRefresh() {
           // 清空列表数据
@@ -264,6 +311,7 @@
           // 重新加载数据
           // 将 loading 设置为 true，表示处于加载状态
           this.loading = true;
+          // that.page++;
           this.onLoad();
         },
         toggle(index) {
@@ -301,16 +349,33 @@
           this.areaName="";
           this.AnYuanHao="";
           this.userName="";
-          this.gaoPhoneNumber="";
+          this.phoneNumber="";
           this.allocation="";
           this.auxiliary="";
           this.radioBox1State=0;
           this.radioBoxState=0;
+          this.page=0;
+          this.onLoad();
         },
         save(){
           this.show = false;
+          this.page=0;
+          this.onLoad();
+        },
+        searchByNumber(value){
+          console.log(value);
+          // if(!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(value))){
+          //   this.$toast('请输入正确手机号');
+          //   // return false;
+          // }
 
+          this.page=0;
+          this.onLoad();
+        },
+        numValid(value){
+          this[value] =this[value].replace(/[^0-9]/g,'')
         }
+
       },
         mounted() {
           console.log(this.$route.params.id);
@@ -319,6 +384,37 @@
 </script>
 
 <style scoped>
+  .fenpeiListBox1{
+    background: none;
+  }
+  .fenpeiListBox{
+    margin-bottom: 14px;
+  }
+  .telBox{
+    font-size: 0.2666rem;
+    color: #5c5c5c;
+    text-decoration:underline;
+  }
+  .fenpeiListTitle{
+    color: #5c5c5c;
+    font-size: 24px;
+
+  }
+  .searchBox{
+    background: #f9f9f9;
+    height: 90px;
+  }
+  .searchBox >>> .van-search__content{
+    height: 0.826rem;
+    background-color: #ffffff;
+  }
+  .searchBox >>> .van-field__control{
+    line-height: 0.826rem;
+  }
+  .searchBox >>> .van-icon-search{
+    line-height: 0.826rem;
+    font-weight: 600;
+  }
   .noMessage{
     text-align: center;
     font-size: 18px;
@@ -328,11 +424,14 @@
     padding: 10px 16px;
     font-size: 12px;
   }
-  .navBox >>>.van-nav-bar__text{
-    color: #000000;
+  .navBox >>> .van-nav-bar__title{
+    color: #5c5c5c;
+    font-size: 0.2667rem;
+    font-weight: 600;
   }
+
   .navBox >>>.van-icon-arrow-left{
-    color: #000000;
+    color: #5c5c5c;
   }
   .radioBox1{
     color: rgb(255, 255, 255);
@@ -364,12 +463,13 @@
     border: none;
   }
   .van-field >>> .van-cell__title{
-    font-size: 0.3rem;
+    font-size: 0.2666rem;
     line-height: 0.7rem;
-    color: #969799;
+    color: #5c5c5c;
   }
   .van-field >>>.van-field__control{
-    color: #969799;
+    font-size: 0.2666rem;
+    color: #5c5c5c;
   }
   .van-cell__title, .van-cell__value{
     margin-left: 15px;
@@ -379,12 +479,14 @@
     text-align: center;
     font-size: 0.4rem;
     line-height: 1rem;
+    color: #5c5c5c;
     /*border-bottom: 1px solid #cccccc;*/
   }
   .leftTittle{
     position: relative;
-    font-size: 0.4rem;
-    line-height: 1rem;
+    font-size: 0.32rem;
+    line-height: 0.93333rem;
+    color: #5c5c5c;
     padding-left: 32px;
   }
   .rightTittle::after {

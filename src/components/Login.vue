@@ -74,9 +74,25 @@
         }
         else{
           var that=this // 放置指针，便于then操作的获取
+
           let dateTime=new Date();
+          let timestamp=dateTime.getTime();
           let nonce =dateTime.getTime();
-          that.fetchGet('restApi/mobile/Login',{username:that.username,"password":Base64.encode(that.password+nonce)}).then((res) => {
+          let stringSignTemp="accesskey=apiuser&nonce="+nonce+"&timestamp="+timestamp+"&secretkey=bb9e490d4dd335b96aed228dc6e6156fi8l3u"
+          let sign=this.$md5(stringSignTemp).toUpperCase();
+          // param.accesskey="apiuser";
+          // param.timestamp=timestamp;
+          // param.nonce=nonce;
+          // param.sign=sign;
+          var param={
+            username:that.username,
+            password:Base64.encode(that.password+nonce),
+            accesskey:"apiuser",
+            timestamp:timestamp,
+            nonce:nonce,
+            sign:sign
+          }
+          that.fetchGet('restApi/mobile/Login',param).then((res) => {
             console.log(res);
             if(res.data.code==200){
               localStorage.setItem("access_token", res.data.data.access_token);

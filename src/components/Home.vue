@@ -26,14 +26,14 @@
         <div class="textNumber">{{NotReplyCount}}</div>
         <div class="gardText">待反馈</div>
       </van-grid-item>
-      <van-grid-item   @click="toFeipei(3)">
+      <van-grid-item  class="gridBox"   @click="toFeipei(3)">
         <div class="textNumber">{{NotProcessCount}}</div>
         <div class="gardText">待处理</div>
       </van-grid-item>
 <!--      <van-grid-item  text="我的分配" @click="toFeipei(1)">-->
 <!--        <van-icon class="iconfont" class-prefix="icon" slot="icon" name="woderenwu"></van-icon>-->
 <!--      </van-grid-item>-->
-      <van-grid-item   @click="toFeipei(1)">
+      <van-grid-item   class="gridBox"  @click="toFeipei(1)">
         <div class="textNumber">{{AllCount}}</div>
         <div class="gardText">我的分配</div>
       </van-grid-item>
@@ -82,6 +82,10 @@
 </script>
 
 <style scoped>
+
+  .gridBox >>> .van-grid-item__content::after{
+    border-width: 0 2px 0 0;
+  }
   .gridBox{
     height: 172px;
   }
@@ -123,7 +127,4 @@
   }
 </style>
 <style>
-  .van-grid-item__content::after{
-    border-width: 0 2px 1px 0;
-  }
 </style>
