@@ -19,7 +19,7 @@
       />
       <van-popup v-model="show" class="rightPopupBox" position="right" :style="{ width: '70%',height: '100%' }" >
         <div class="rightTittle">高级查询</div>
-        <van-field v-model="areaName" type="text" label="省份"  placeholder="选择省份" @focus="chooseArea"/>
+        <van-field v-model="areaName" type="text" label="省份"  placeholder="选择省份" readonly @click="chooseArea"/>
         <van-field v-model="AnYuanHao" type="text" label="案源号"  placeholder="输入案源号"/>
         <!-- 输入手机号，调起手机号键盘 -->
         <van-field v-model="userName" type="text" label="客户姓名"   placeholder="输入客户姓名"/>
