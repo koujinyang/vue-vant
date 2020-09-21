@@ -66,6 +66,7 @@
           }) .then(() => {
             // on confirm
             localStorage.setItem("access_token", "");
+            localStorage.setItem("isLogin", "");
             this.$router.push({ path:'/login'});
           })
             .catch(() => {

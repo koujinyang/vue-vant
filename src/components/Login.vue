@@ -95,6 +95,7 @@
           that.fetchGet('restApi/mobile/Login',param).then((res) => {
             console.log(res);
             if(res.data.code==200){
+              localStorage.setItem("isLogin", "yes");
               localStorage.setItem("access_token", res.data.data.access_token);
               this.$router.push({ path:'/index'})
             }else {

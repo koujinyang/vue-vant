@@ -25,7 +25,7 @@
       mounted() {
           let that=this;
           setTimeout(function () {
-            if(localStorage.getItem("lvshiIsLogin")=='yes'){
+            if(localStorage.getItem("isLogin")=='yes'){
               that.$router.push({ path:'/index'});
             }else {
               that.$router.push({ path:'/login'});
