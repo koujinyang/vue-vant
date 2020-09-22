@@ -51,11 +51,13 @@ export default {
     position: absolute;
     height: 100%;
     transition: all .377s ease;
-    will-change: transform;
+    /*will-change: transform;*/
     top: 0;
     backface-visibility: hidden;
-    perspective: 1000;
+    /*perspective: 1000;*/
     width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
   .slide-left-enter,
   .slide-right-leave-active {

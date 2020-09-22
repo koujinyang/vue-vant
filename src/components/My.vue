@@ -66,6 +66,7 @@
           }) .then(() => {
             // on confirm
             localStorage.setItem("access_token", "");
+            localStorage.setItem("isLogin", "");
             this.$router.push({ path:'/login'});
           })
             .catch(() => {
@@ -87,7 +88,7 @@
   }
   .bottomBoxButton{
     border-radius: 8px;
-    font-size: 24px;
+    /*font-size: 24px;*/
   }
   .bottomBox{
     position: fixed;
