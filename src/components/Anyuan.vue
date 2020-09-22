@@ -2,7 +2,7 @@
     <div >
       <van-nav-bar
         title="案源信息"
-        fixed
+        :fixed="!showPicker"
         placeholder
         left-arrow
         @click-left="onClickLeft"
@@ -113,12 +113,12 @@
           input-align="right"
           class="noBottom"
         >
-        <template #label>
-          <span class="anyuanLabel">分配人员:</span>
-        </template>
-        <template #input>
-          <span class="anyuanLabel">{{anyuanData.allocation}}</span>
-        </template>
+          <template #label>
+            <span class="anyuanLabel">分配人员:</span>
+          </template>
+          <template #input>
+            <span class="anyuanLabel">{{anyuanData.allocation}}</span>
+          </template>
         </van-field>
         <van-field
           v-model="anyuanData.auxiliary"
@@ -135,11 +135,11 @@
             <span class="anyuanLabel">{{anyuanData.auxiliary}}</span>
           </template>
         </van-field>
-<!--        <div style="margin: 16px;">-->
-<!--          <van-button round block type="info" native-type="submit">-->
-<!--            提交-->
-<!--          </van-button>-->
-<!--        </div>-->
+        <!--        <div style="margin: 16px;">-->
+        <!--          <van-button round block type="info" native-type="submit">-->
+        <!--            提交-->
+        <!--          </van-button>-->
+        <!--        </div>-->
       </van-form>
       <van-form class="centerForm">
         <van-field
@@ -185,7 +185,7 @@
         </div>
       </van-form>
       <van-cell-group class="genjinBox">
-<!--        <div class="formTittle">跟进信息</div>-->
+        <!--        <div class="formTittle">跟进信息</div>-->
         <van-cell class="genjinBox1" title="跟进信息" title-class="genjinTitle1"/>
         <van-cell class="genjinBox1" v-for="(item, index) in genjinData" :key="item.id" :title="item.name +' '+item.time" :value="item.type" :label="item.message" >
           <template #title>
@@ -200,6 +200,7 @@
         </van-cell>
         <div v-if="genjinData.length==0" class="noGenjin">暂无跟进信息</div>
       </van-cell-group>
+
     </div>
 </template>
 
@@ -343,6 +344,7 @@
 </script>
 
 <style scoped>
+
   .noGenjin{
     text-align: center;
     font-size: 20px;
@@ -396,7 +398,7 @@
   }
   .navBox >>> .van-nav-bar__title{
     color: #5c5c5c;
-    font-size: 0.2667rem;
+    font-size: 20px;
     font-weight: 600;
   }
   .navBox >>>.van-icon-arrow-left{

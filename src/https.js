@@ -4,7 +4,7 @@ import router from './router'
 
 import qs from 'qs'
 var root=process.env.API_ROOT;
-axios.defaults.timeout = 5000;                        //响应时间
+axios.defaults.timeout = 30*1000;                        //响应时间
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';        //配置请求头
 axios.defaults.headers.post['Content-Type'] = 'application/json; charset=UTF-8'
 

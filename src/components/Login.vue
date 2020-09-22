@@ -12,6 +12,7 @@
       <div class="loginImgBox">
         <span class="icon iconfont icon-yonghu"></span>
       </div>
+      <van-form @submit="onClickButtonSubmit">
       <van-field
         v-model="username"
         clearable
@@ -19,6 +20,9 @@
         placeholder="请输入用户名"
         left-icon="contact"
         class="loginField"
+
+        id="key1"
+        @click="keyBardUp1"
       >
         <span slot="label" class="labelText">用户名</span>
         <van-icon class="iconfont" class-prefix="icon" slot="left-icon" name="icon-user"></van-icon>
@@ -32,6 +36,9 @@
         placeholder="请输入密码"
         left-icon="mima"
         class="loginField"
+        @click="keyBardUp"
+        ref="key"
+        id="key"
       >
         <span slot="label" class="labelText">密码</span>
         <van-icon class="iconfont" class-prefix="icon" slot="left-icon" name="mima"></van-icon>
@@ -39,6 +46,7 @@
       </van-field>
       <!--登录按钮-->
       <div class="pd15"><van-button class="loginBtn" color="#d51927" size="large" @click="onClickButtonSubmit">登录</van-button></div>
+      </van-form>
     </div>
   </div>
 </template>
@@ -133,7 +141,29 @@
           // e.preventDefault();
         }
       },
+      keyBardUp(){
+        var that = this;
+        setTimeout(function(){
+          document.getElementById("key").scrollIntoView(true);
+        },400);
+      },
+      keyBardUp1(){
+        var that = this;
+        setTimeout(function(){
+          document.getElementById("key1").scrollIntoView(true);
+        },400);
+      }
 
+    },
+    mounted() {
+      window.addEventListener('resize', function () {
+        if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
+          window.setTimeout(function () {
+            console.log(11);
+            document.activeElement.scrollIntoViewIfNeeded();
+          }, 0)
+        }
+      })
     }
   }
 </script>
@@ -164,7 +194,7 @@
   .navBox >>> .van-nav-bar__title{
     max-width: 100%;
     color: #5c5c5c;
-    font-size: 0.2667rem;
+    font-size: 20px;
     font-weight: 600;
   }
 

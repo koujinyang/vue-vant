@@ -5,7 +5,7 @@
     <transition :name="transitionName">
         <router-view class="Router"/>
     </transition>
-    <van-tabbar v-model="active" fixed >
+    <van-tabbar v-model="active" fixed placeholder  safe-area-inset-bottom>
       <van-tabbar-item name="home" to="home" :icon="active=='home'?icon.homeActive:icon.home">
         <span class="menuText">首页</span>
       </van-tabbar-item>
@@ -81,10 +81,10 @@
     height: 100%;
     width: 100%;
     transition: all .377s ease;
-    will-change: transform;
+    /*will-change: transform;*/
     top: 0;
     backface-visibility: hidden;
-    perspective: 1000;
+    /*perspective: 1000;*/
   }
   .slide-left-enter,
   .slide-right-leave-active {

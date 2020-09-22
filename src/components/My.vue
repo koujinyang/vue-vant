@@ -88,7 +88,7 @@
   }
   .bottomBoxButton{
     border-radius: 8px;
-    font-size: 24px;
+    /*font-size: 24px;*/
   }
   .bottomBox{
     position: fixed;
