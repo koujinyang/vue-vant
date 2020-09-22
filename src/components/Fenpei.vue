@@ -17,9 +17,9 @@
         @input="numValid('phoneNumber')"
         @search="searchByNumber"
       />
-      <van-popup v-model="show" class="rightPopupBox" position="right" :style="{ width: '70%',height: '100%' }" >
+      <van-popup v-model="show" class="rightPopupBox" position="right"  :style="{ width: '70%',height: '100%' }" >
         <div class="rightTittle">高级查询</div>
-        <van-field v-model="areaName" type="text" label="省份"  placeholder="选择省份" @focus="chooseArea"/>
+        <van-field v-model="areaName" type="text" label="省份"  placeholder="选择省份" readonly @click="chooseArea"/>
         <van-field v-model="AnYuanHao" type="text" label="案源号"  placeholder="输入案源号"/>
         <!-- 输入手机号，调起手机号键盘 -->
         <van-field v-model="userName" type="text" label="客户姓名"   placeholder="输入客户姓名"/>
@@ -60,7 +60,11 @@
         v-model="showArea"
         position="bottom"
         :style="{ height: '50%' }">
-        <van-area :area-list="areaList" :columns-num="1"  value="110000" ref="myArea"  title="选择省份" @confirm="onConfirm" @cancel="onCancel"/>
+        <van-area :area-list="areaList" :columns-num="1"  :columns-placeholder="['请选择']"   value="110000" ref="myArea"  title="选择省份" @confirm="onConfirm" @cancel="onCancel">
+<!--          <template #columns-top>-->
+<!--            <div>jjjjj</div>-->
+<!--          </template>-->
+        </van-area>
       </van-popup>
       <van-pull-refresh v-model="refreshing" @refresh="onRefresh" :disabled="pullDown">
         <van-list
@@ -69,7 +73,7 @@
           finished-text="没有更多数据了"
           @load="onLoad"
         >
-<!--          <div v-if="list.length==0" class="noMessage">无数据</div>-->
+          <!--          <div v-if="list.length==0" class="noMessage">无数据</div>-->
           <van-checkbox-group v-model="result">
             <van-cell-group class="fenpeiListBox1">
               <van-cell
@@ -101,15 +105,15 @@
                 <template #icon >
                   <van-checkbox :name="item.id" ref="checkboxes"   @click="choosePersons"/>
                 </template>
-<!--                <template #right-icon >-->
-<!--                  <van-icon name="arrow"  @click="toAnyuan(item.id)"></van-icon>-->
-<!--                </template>-->
+                <!--                <template #right-icon >-->
+                <!--                  <van-icon name="arrow"  @click="toAnyuan(item.id)"></van-icon>-->
+                <!--                </template>-->
               </van-cell>
             </van-cell-group>
           </van-checkbox-group>
         </van-list>
       </van-pull-refresh>
-      <div class="setFuban1" v-show="result.length>0"><van-button color="#d51927"  size="small"    @click.stop.prevent="choosePerson1()">设置辅版</van-button></div>
+      <div class="setFuban1" v-show="result.length>0"><van-button color="#d51927"  size="small"    @click.stop.prevent="choosePerson1()">设置辅办</van-button></div>
 
     </div>
 </template>
@@ -201,6 +205,7 @@
         //确定选择城市
         onConfirm(val) {
           this.areaName = val[0].name;
+          console.log(this.areaName);
           this.showArea = false//关闭弹框
         },
         //取消选中城市
@@ -355,6 +360,7 @@
           this.radioBox1State=0;
           this.radioBoxState=0;
           this.page=0;
+          this.show = false;
           this.onLoad();
         },
         save(){
@@ -426,7 +432,7 @@
   }
   .navBox >>> .van-nav-bar__title{
     color: #5c5c5c;
-    font-size: 0.2667rem;
+    font-size: 20px;
     font-weight: 600;
   }
 
@@ -452,9 +458,13 @@
     text-align: right;
   }
   .setFuban1{
-    position: fixed;
+    position: sticky;
     bottom: 0.5rem;
     right: 32px;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    text-align: right;
+    padding-right: 32px;
   }
   .van-field{
     padding: 0 ;
