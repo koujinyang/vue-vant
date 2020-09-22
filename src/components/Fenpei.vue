@@ -103,7 +103,7 @@
                   <div class="setFuban" v-show="result.length==0&&item.mainLawyer"><van-button color="#d51927"  size="small"   @click.stop.prevent="choosePerson(item.id)">设置辅办</van-button></div>
                 </template>
                 <template #icon >
-                  <van-checkbox :name="item.id" ref="checkboxes"   @click="choosePersons"/>
+                  <van-checkbox :name="item.id" ref="checkboxes" checked-color="#d50927"   @click="choosePersons"/>
                 </template>
                 <!--                <template #right-icon >-->
                 <!--                  <van-icon name="arrow"  @click="toAnyuan(item.id)"></van-icon>-->

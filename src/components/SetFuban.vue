@@ -102,7 +102,7 @@
   }
   .navBox >>> .van-nav-bar__title{
     color: #5c5c5c;
-    font-size: 0.2667rem;
+    font-size: 20px;
     font-weight: 600;
   }
   .navBox >>>.van-icon-arrow-left{
