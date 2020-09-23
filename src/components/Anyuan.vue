@@ -15,7 +15,7 @@
           v-model="anyuanData.AnYuanJieShao"
           autosize
           label=""
-          class="textareaBox noBottom"
+          class="textareaBox noBottom "
           type="textarea"
           placeholder="请输入案情介绍"
           colon
@@ -61,7 +61,7 @@
             <span class="anyuanLabel">主联系电话:</span>
           </template>
           <template #input>
-            <a :href="'tel:' + anyuanData.phoneNumber" class="telBox">{{anyuanData.phoneNumber+"(点击呼出)"}}</a>
+            <a :href="'tel:' + anyuanData.phoneNumber" class="telBox">{{anyuanData.phoneNumber}}</a>
           </template>
         </van-field>
         <van-field
@@ -176,10 +176,10 @@
           style=""
         />
         <div style="text-align: center;clear: both">
-          <van-button color="#d51927"  size="small"  native-type="submit" @click="saveGenjin">
+          <van-button color="#d51927"  class="smallButton"   size="small"  native-type="submit" @click="saveGenjin">
             保存
           </van-button>
-          <van-button color="#d51927" size="small" style="margin-left: 1rem"  native-type="submit" @click="resteGenjin">
+          <van-button color="#d51927"  class="smallButton"  size="small" style="margin-left: 1rem"  native-type="submit" @click="resteGenjin">
             取消
           </van-button>
         </div>
@@ -344,14 +344,16 @@
 </script>
 
 <style scoped>
-
+.smallButton{
+  font-size: 0.4rem;
+}
   .noGenjin{
     text-align: center;
     font-size: 20px;
     line-height: 40px;
   }
   .genjinTitle,.genjinLabel,.genjinDefault{
-    font-size: 20px;
+    font-size: 0.4rem;
     color: #5c5c5c;
   }
   .genjinDefault{
@@ -361,7 +363,7 @@
     /*text-align: right;*/
   }
   .genjinTitle1{
-    font-size: 24px;
+    font-size: 0.4rem;
     color: #5c5c5c;
   }
   .genjinBox1{
@@ -379,12 +381,12 @@
   }
 
   .telBox{
-    font-size: 0.2666rem;
+    font-size: 0.4rem;
     color: #5c5c5c;
-    text-decoration:underline;
+    /*text-decoration:underline;*/
   }
   .anyuanLabel{
-    font-size: 20px;
+    font-size: 0.4rem;
     color: #5c5c5c;
   }
   .noBottom::after{
@@ -397,7 +399,7 @@
     padding: 0 15px;
   }
   .navBox >>> .van-nav-bar__title{
-    color: #5c5c5c;
+    /*color: #5c5c5c;*/
     font-size: 20px;
     font-weight: 600;
   }
@@ -422,12 +424,12 @@
   }
   .textareaBoxTittle{
     background-color: #ffffff;
-    font-size: 20px;
-    line-height: 70px;
+    font-size: 0.4rem;
+    line-height: 1rem;
     padding-left: 32px;
   }
   .textareaBox{
-    padding: 0 32px 60px 32px;
+    padding: 0 32px 32px 32px;
   }
   .textareaBox1{
     padding: 0 32px 32px 32px;
@@ -437,10 +439,11 @@
     padding: 10px;
     border-radius: 10px;
     height: 168px;
+    font-size: 0.4rem;
   }
 .formTittle{
-  font-size: 24px;
-  line-height: 70px;
+  font-size: 0.4rem;
+  line-height: 1.2rem;
   color: #5c5c5c;
   /*background-color: #cccccc;*/
   padding: 0 30px;

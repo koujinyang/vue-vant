@@ -70,7 +70,7 @@
 </script>
 <style scoped>
   .menuText{
-    font-size: 0.2133rem;
+    font-size: 0.32rem;
     color: #989898;
   }
   .van-tabbar-item--active .menuText{
@@ -109,7 +109,7 @@
     margin-bottom: 0;
   }
   .van-tabbar-item >>>.van-tabbar-item__icon img{
-    height: 30px;
+    height: 25px;
   }
   .van-tabbar{
     background: #b7bbbf;

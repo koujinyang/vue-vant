@@ -114,7 +114,7 @@
     border: none;
   }
   .anyuanLabel{
-    font-size: 20px;
+    font-size: 0.4rem;
     color: #5c5c5c;
   }
   .navBox >>> .van-nav-bar__title{

@@ -38,28 +38,29 @@
 <!--    </van-grid-item>-->
   </van-grid>
 
-  <div class="myDistribution">我的台账</div>
+<!--  <div class="myDistribution">我的台账</div>-->
 
-  <van-grid :column-num='3'>
-    <van-grid-item   class="gridBox" >
-      <div class="textNumber">15,000</div>
-      <div class="gardText">代开票金额</div>
-    </van-grid-item>
-    <van-grid-item   class="gridBox">
-      <div class="textNumber">15,000</div>
-      <div class="gardText">本月收入</div>
-    </van-grid-item>
-<!--    <van-grid-item    @click="toFeipei">-->
+<!--  <van-grid :column-num='3'>-->
+<!--    <van-grid-item   class="gridBox" >-->
 <!--      <div class="textNumber">15,000</div>-->
-<!--      <div>敬请期待</div>-->
+<!--      <div class="gardText">代开票金额</div>-->
 <!--    </van-grid-item>-->
+<!--    <van-grid-item   class="gridBox">-->
+<!--      <div class="textNumber">15,000</div>-->
+<!--      <div class="gardText">本月收入</div>-->
+<!--    </van-grid-item>-->
+<!--&lt;!&ndash;    <van-grid-item    @click="toFeipei">&ndash;&gt;-->
+<!--&lt;!&ndash;      <div class="textNumber">15,000</div>&ndash;&gt;-->
+<!--&lt;!&ndash;      <div>敬请期待</div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </van-grid-item>&ndash;&gt;-->
 
-        <van-grid-item class="gridBox" text="敬请期待">
-          <van-icon class="iconfont" class-prefix="icon" slot="icon" name="ziyuanldpi"></van-icon>
-
-<!--          <div class="gardText">敬请期待</div>-->
-        </van-grid-item>
-  </van-grid>
+<!--        <van-grid-item class="gridBox" text="敬请期待">-->
+<!--          <van-icon class="iconfont" class-prefix="icon" slot="icon" name="ziyuanldpi"></van-icon>-->
+<!--          <template #text>-->
+<!--            <div class="gardText">敬请期待</div>-->
+<!--          </template>-->
+<!--        </van-grid-item>-->
+<!--  </van-grid>-->
 </div>
 </template>
 
@@ -117,21 +118,21 @@
     font-size: 20px;
   }
   .myDistribution{
-    font-size: 24px;
-    line-height: 62px;
+    font-size: 0.4rem;
+    line-height: 1.2rem;
     color: #5c5c5c;
     /*background-color: #cccccc;*/
     padding: 0 30px;
   }
 
   .textNumber{
-    font-size: 34px;
+    font-size: 0.5rem;
     color: #d51927;
   }
 
   .gardText{
     margin-top: 10px;
-    font-size: 20px;
+    font-size: 0.4rem;
     color: #5c5c5c;
   }
   .icon-ziyuanldpi{
