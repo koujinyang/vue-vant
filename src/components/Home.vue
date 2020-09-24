@@ -91,6 +91,7 @@
   }
   .indexImg{
     width: 100%;
+    max-height: 7rem;
     /*height: 320px;*/
   }
   .navBox >>> .van-ellipsis{
@@ -110,19 +111,19 @@
     color: #ff0000;
   }
   .myDistribution{
-    font-size: 24px;
-    line-height: 62px;
+    font-size: 0.4rem;
+    line-height: 1.2rem;
     color: #5c5c5c;
     /*background-color: #cccccc;*/
     padding: 0 30px;
   }
   .textNumber{
-    font-size: 34px;
+    font-size: 0.5rem;
     color: #d51927;
   }
   .gardText{
     margin-top: 10px;
-    font-size: 20px;
+    font-size: 0.4rem;
     color: #5c5c5c;
   }
 </style>

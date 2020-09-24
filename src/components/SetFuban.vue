@@ -8,7 +8,12 @@
         @click-left="onClickLeft"
         class="navBox"
       />
-      <van-cell title="选择辅办人员" class="noBottom"/>
+      <div class="formTittle">选择辅办人员</div>
+<!--      <van-cell title="选择辅办人员" class="noBottom">-->
+<!--        <template #title>-->
+<!--          <div class="tittle">选择辅办人员</div>-->
+<!--        </template>-->
+<!--      </van-cell>-->
       <van-checkbox-group v-model="result">
         <van-cell-group>
           <van-cell
@@ -88,8 +93,16 @@
 </script>
 
 <style scoped>
+
+  .formTittle{
+    font-size: 0.4rem;
+    line-height: 1.2rem;
+    color: #5c5c5c;
+    /*background-color: #cccccc;*/
+    padding: 0 30px;
+  }
   .setFubanName{
-    font-size: 20px;
+    font-size: 0.4rem;
   }
   .checkboxBox{
     margin-right: 20px;

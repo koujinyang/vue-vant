@@ -17,7 +17,7 @@
         @input="numValid('phoneNumber')"
         @search="searchByNumber"
       />
-      <van-popup v-model="show" class="rightPopupBox" position="right"  :style="{ width: '70%',height: '100%' }" >
+      <van-popup v-model="show" class="rightPopupBox" position="right"   >
         <div class="rightTittle">高级查询</div>
         <van-field v-model="areaName" type="text" label="省份"  placeholder="选择省份" readonly @click="chooseArea"/>
         <van-field v-model="AnYuanHao" type="text" label="案源号"  placeholder="输入案源号"/>
@@ -50,7 +50,7 @@
             <span class="radioBox" :class="radioBox1State==2?'radioBox1':''" @click="changeState1(2)" >未设置</span>
           </van-col>
         </van-row>
-        <van-row style="position: fixed;bottom: 0;width: 100%;">
+        <van-row style="position: fixed;bottom: 0;width: 100%;"  v-show="isOriginHei">
           <van-col span="12"><van-button type="default" size="large" @click="reset">重置</van-button></van-col>
           <van-col span="12"><van-button type="info" size="large" color="#c30000" @click="save">确认</van-button></van-col>
         </van-row>
@@ -92,7 +92,7 @@
                     <van-field @click="toAnyuan(item.id)"  v-model="item.AnYuanHao"  label-width="3rem" label="案源号：" input-align="right" readonly/>
                     <van-field  v-model="item.phoneNumber"  label-width="3rem" label="主联系电话：" input-align="right" readonly>
                       <template #input>
-                        <a :href="'tel:' + item.phoneNumber" class="telBox">{{item.phoneNumber+"(点击呼出)"}}</a>
+                        <a :href="'tel:' + item.phoneNumber" class="telBox">{{item.phoneNumber}}</a>
                       </template>
                     </van-field>
                     <van-field @click="toAnyuan(item.id)"  v-model="item.rovince"  label-width="3rem" label="省份：" input-align="right" readonly/>
@@ -100,7 +100,7 @@
                     <van-field @click="toAnyuan(item.id)"  v-model="item.allocation"  label-width="3rem" label="分配人员：" input-align="right" readonly/>
                     <van-field @click="toAnyuan(item.id)"  v-model="item.auxiliary"  label-width="3rem" label="辅办人员：" input-align="right" readonly/>
                   </div>
-                  <div class="setFuban" v-show="result.length==0&&item.mainLawyer"><van-button color="#d51927"  size="small"   @click.stop.prevent="choosePerson(item.id)">设置辅办</van-button></div>
+                  <div class="setFuban" v-show="result.length==0&&item.mainLawyer"><van-button color="#d51927" class="smallButton"  size="small"   @click.stop.prevent="choosePerson(item.id)">设置辅办</van-button></div>
                 </template>
                 <template #icon >
                   <van-checkbox :name="item.id" ref="checkboxes" checked-color="#d50927"   @click="choosePersons"/>
@@ -113,7 +113,7 @@
           </van-checkbox-group>
         </van-list>
       </van-pull-refresh>
-      <div class="setFuban1" v-show="result.length>0"><van-button color="#d51927"  size="small"    @click.stop.prevent="choosePerson1()">设置辅办</van-button></div>
+      <div class="setFuban1" v-show="result.length>0"><van-button color="#d51927"  size="small"  class="smallButton"    @click.stop.prevent="choosePerson1()">设置辅办</van-button></div>
 
     </div>
 </template>
@@ -181,6 +181,9 @@
             radioBoxState:0,
             radioBox1State:0,
             page:0,//第几页
+            isOriginHei: true,
+            screenHeight: document.documentElement.clientHeight,        //此处也可能是其他获取方法
+            originHeight: document.documentElement.clientHeight,
           }
       },
     //  1、我的分配 2、待反馈 3、待处理 4、待设置辅办 5、已签合同 6、今日分配 7、本月分配 8、本年分配
@@ -385,11 +388,29 @@
       },
         mounted() {
           console.log(this.$route.params.id);
+          let self = this;
+          window.onresize = function() {
+            return (function(){
+              self.screenHeight = document.documentElement.clientHeight;
+            })()
+          }
+        },
+      watch:{
+        screenHeight (val) {
+          if(this.originHeight > val + 100) {        //加100为了兼容华为的返回键
+            this.isOriginHei = false;
+          }else{
+            this.isOriginHei = true;
+          }
         }
+      }
     }
 </script>
 
 <style scoped>
+  .smallButton{
+    font-size: 0.4rem;
+  }
   .fenpeiListBox1{
     background: none;
   }
@@ -397,13 +418,13 @@
     margin-bottom: 14px;
   }
   .telBox{
-    font-size: 0.2666rem;
+    font-size: 0.4rem;
     color: #5c5c5c;
-    text-decoration:underline;
+    /*text-decoration:underline;*/
   }
   .fenpeiListTitle{
     color: #5c5c5c;
-    font-size: 24px;
+    font-size: 0.4rem;
 
   }
   .searchBox{
@@ -426,12 +447,16 @@
     font-size: 18px;
     line-height: 50px;
   }
+  .rightPopupBox{
+    width: 70%;
+    height: 100%;
+  }
   .rightPopupBox .van-cell{
     padding: 10px 16px;
     font-size: 12px;
   }
   .navBox >>> .van-nav-bar__title{
-    color: #5c5c5c;
+    /*color: #5c5c5c;*/
     font-size: 20px;
     font-weight: 600;
   }
@@ -446,7 +471,8 @@
   }
   .radioBox{
     display: inline-block;
-    padding: 5px;
+    font-size: 0.4rem;
+    padding: 8px;
     width: 100%;
     border: 1px solid #cccccc;
 
@@ -456,6 +482,7 @@
     /*bottom: 0.5rem;*/
     /*right: 1rem;*/
     text-align: right;
+    margin-top: 10px;
   }
   .setFuban1{
     position: sticky;
@@ -473,12 +500,12 @@
     border: none;
   }
   .van-field >>> .van-cell__title{
-    font-size: 0.2666rem;
+    font-size: 0.4rem;
     line-height: 0.7rem;
     color: #5c5c5c;
   }
   .van-field >>>.van-field__control{
-    font-size: 0.2666rem;
+    font-size: 0.4rem;
     color: #5c5c5c;
   }
   .van-cell__title, .van-cell__value{
@@ -487,14 +514,14 @@
   .rightTittle{
     position: relative;
     text-align: center;
-    font-size: 0.4rem;
     line-height: 1rem;
     color: #5c5c5c;
+    font-size: 0.5rem;
     /*border-bottom: 1px solid #cccccc;*/
   }
   .leftTittle{
     position: relative;
-    font-size: 0.32rem;
+    font-size: 0.4rem;
     line-height: 0.93333rem;
     color: #5c5c5c;
     padding-left: 32px;

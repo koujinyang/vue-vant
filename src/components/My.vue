@@ -83,7 +83,7 @@
 
 <style scoped>
   .myCellTitle{
-    font-size: 20px;
+    font-size: 0.4rem;
     color: #5c5c5c;
   }
   .bottomBoxButton{
@@ -112,14 +112,14 @@
     background-color: #ffffff;
   }
 .nameBox{
-  margin-top: 0.6rem;
-  font-size: 0.35rem;
-  line-height: 0.5rem;
+  margin-top: 0.5rem;
+  font-size: 0.5rem;
+  line-height: 0.6rem;
   margin-left: 20px;
   color: #999999;
 }
 .userBox{
-  font-size: 0.25rem;
+  font-size: 0.4rem;
   line-height: 0.7rem;
   color: #cccccc;
   margin-left: 20px;

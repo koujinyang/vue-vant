@@ -2,7 +2,7 @@
   <div class="hello">
 
     <van-nav-bar
-      title="北京在明律师事务所案件管理系统"
+      title="北京在明律师事务所"
       fixed
       placeholder
       class="navBox"
@@ -144,13 +144,13 @@
       keyBardUp(){
         var that = this;
         setTimeout(function(){
-          document.getElementById("key").scrollIntoView(true);
+          document.getElementById("key").scrollIntoViewIfNeeded(true);
         },400);
       },
       keyBardUp1(){
         var that = this;
         setTimeout(function(){
-          document.getElementById("key1").scrollIntoView(true);
+          document.getElementById("key1").scrollIntoViewIfNeeded(true);
         },400);
       }
 
@@ -186,17 +186,18 @@
     text-align: center;
   }
   .navBox{
-    height: 1.067rem !important;
+    /*height: 1.067rem !important;*/
   }
   .navBox >>> .van-nav-bar{
-    height: 1.067rem !important;
+    /*height: 1.067rem !important;*/
   }
   .navBox >>> .van-nav-bar__title{
     max-width: 100%;
-    color: #5c5c5c;
+    /*color: #5c5c5c;*/
     font-size: 20px;
     font-weight: 600;
   }
+
 
   .navBox >>> .van-nav-bar__text{
     color: #000000;
@@ -205,10 +206,14 @@
     font-size: 0.6rem;
   }
   .labelText{
-    font-size: 25px;
+    font-size: 0.4rem;
   }
   .van-field >>> .van-field__label{
     width: 2.5rem;
+  }
+  .van-field >>>.van-field__control{
+    font-size: 0.4rem;
+    /*color: #5c5c5c;*/
   }
   .icon-yonghu{
     font-size: 215px;
