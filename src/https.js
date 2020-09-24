@@ -123,7 +123,10 @@ axios.interceptors.response.use((res) =>{
   return res;
   // return Promise.resolve(res.data);
 }, (error) => {
-  console.log('网络异常')
+  console.log('网络异常');
+  // console.log(error.response.status);
+  // console.log(error.response.data.message);
+  Toast(error.response.data.message);
   return Promise.reject(error);
 });
 
