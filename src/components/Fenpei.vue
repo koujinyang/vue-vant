@@ -184,6 +184,7 @@
             isOriginHei: true,
             screenHeight: document.documentElement.clientHeight,        //此处也可能是其他获取方法
             originHeight: document.documentElement.clientHeight,
+            advancedQuery:0
           }
       },
     //  1、我的分配 2、待反馈 3、待处理 4、待设置辅办 5、已签合同 6、今日分配 7、本月分配 8、本年分配
@@ -265,6 +266,7 @@
           data.attorney=that.allocation;
           data.assistLawyer=that.auxiliary;
           data.distributionStatus=distributionStatus;
+          data.advancedQuery=that.advancedQuery
           var radioBox1State;
           if(that.radioBox1State==0){
             radioBox1State="";
@@ -364,11 +366,13 @@
           this.radioBoxState=0;
           this.page=0;
           this.show = false;
+          this.advancedQuery = 0;
           this.onLoad();
         },
         save(){
           this.show = false;
           this.page=0;
+          this.advancedQuery = 1;
           this.onLoad();
         },
         searchByNumber(value){
@@ -379,6 +383,7 @@
           // }
 
           this.page=0;
+          this.advancedQuery = 0;
           this.onLoad();
         },
         numValid(value){
@@ -419,7 +424,7 @@
   }
   .telBox{
     font-size: 0.4rem;
-    color: #5c5c5c;
+    color: #4378be;
     /*text-decoration:underline;*/
   }
   .fenpeiListTitle{

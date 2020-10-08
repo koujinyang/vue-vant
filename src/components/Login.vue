@@ -45,7 +45,7 @@
 
       </van-field>
       <!--登录按钮-->
-      <div class="pd15"><van-button class="loginBtn" color="#d51927" size="large" @click="onClickButtonSubmit">登录</van-button></div>
+      <div class="pd15"><van-button native-type="submit" class="loginBtn" color="#d51927" size="large" >登录</van-button></div>
       </van-form>
     </div>
   </div>
@@ -94,11 +94,12 @@
           // param.sign=sign;
           var param={
             username:that.username,
-            password:Base64.encode(that.password+nonce),
-            accesskey:"apiuser",
-            timestamp:timestamp,
-            nonce:nonce,
-            sign:sign
+            // password:Base64.encode(that.password+nonce),
+            password:that.password,
+            // accesskey:"apiuser",
+            // timestamp:timestamp,
+            // nonce:nonce,
+            // sign:sign
           }
           that.fetchGet('restApi/mobile/Login',param).then((res) => {
             console.log(res);

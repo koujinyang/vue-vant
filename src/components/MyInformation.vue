@@ -118,7 +118,7 @@
     color: #5c5c5c;
   }
   .navBox >>> .van-nav-bar__title{
-    color: #5c5c5c;
+    /*color: #5c5c5c;*/
     font-size: 20px;
     font-weight: 600;
   }

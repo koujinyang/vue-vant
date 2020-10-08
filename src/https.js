@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Toast } from 'vant';
 import router from './router'
-
+let Base64 = require('js-base64').Base64
 import qs from 'qs'
 var root=process.env.API_ROOT;
 axios.defaults.timeout = 30*1000;                        //响应时间
@@ -9,11 +9,12 @@ axios.defaults.timeout = 30*1000;                        //响应时间
 axios.defaults.headers.post['Content-Type'] = 'application/json; charset=UTF-8'
 
 axios.defaults.baseURL = root;   //配置接口地址
-if (process.env.NODE_ENV == 'development') {//开发环境
-  axios.defaults.baseURL = 'http://182.92.117.160:8080/';
-} else if (process.env.NODE_ENV == 'production') {//生产环境
-  axios.defaults.baseURL = 'http://182.92.117.160:8080/';
-}
+axios.defaults.baseURL = 'http://182.92.117.160:8080/';
+// if (process.env.NODE_ENV == 'development') {//开发环境
+//   axios.defaults.baseURL = 'http://182.92.117.160:8080/';
+// } else if (process.env.NODE_ENV == 'production') {//生产环境
+//   axios.defaults.baseURL = 'http://oa.zaimingchaiqian.com/';
+// }
 //POST传参序列化(添加请求拦截器)
 axios.interceptors.request.use((config) => {
   //在发送请求之前做某件事
@@ -132,7 +133,16 @@ export function fetchPost(url, params,parmas1) {
   let dateTime=new Date();
   let timestamp=dateTime.getTime();
   let nonce =dateTime.getTime();
-  let stringSignTemp="accesskey=apiuser&nonce="+nonce+"&timestamp="+timestamp+"&secretkey=bb9e490d4dd335b96aed228dc6e6156fi8l3u"
+  let accesskey='apiuser';
+  let secretkey='bb9e490d4dd335b96aed228dc6e6156fi8l3u';
+  // if (process.env.NODE_ENV == 'development') {//开发环境
+  //   accesskey = 'apiuser';
+  //   secretkey = 'bb9e490d4dd335b96aed228dc6e6156fi8l3u';
+  // } else if (process.env.NODE_ENV == 'production') {//生产环境
+  //   accesskey = 'apiuser_mobile';
+  //   secretkey = '59dbb575a2abc63596cdf820ae9e2e52dwm2p';
+  // }
+  let stringSignTemp="accesskey="+accesskey+"&nonce="+nonce+"&timestamp="+timestamp+"&secretkey="+secretkey+""
   let sign=this.$md5(stringSignTemp).toUpperCase();
   // params.accesskey="apiuser";
   // params.timestamp=timestamp;
@@ -167,7 +177,7 @@ export function fetchPost(url, params,parmas1) {
     // }).catch((error) => {
     //     reject(error)
     //   })
-    axios.post(url+"?accesskey=apiuser&nonce="+nonce+"&timestamp="+timestamp+"&sign="+sign+""+queryData,params,{
+    axios.post(url+"?accesskey="+accesskey+"&nonce="+nonce+"&timestamp="+timestamp+"&sign="+sign+""+queryData,params,{
       headers:{
         Authorization:Authorization
       }
@@ -195,6 +205,25 @@ export function fetchGet(url, param) {
   // param.nonce=nonce;
   // param.sign=sign;
 
+  let dateTime=new Date();
+  let timestamp=dateTime.getTime();
+  let nonce =dateTime.getTime();
+  let accesskey='apiuser';
+  let secretkey='bb9e490d4dd335b96aed228dc6e6156fi8l3u';
+  // if (process.env.NODE_ENV == 'development') {//开发环境
+  //   accesskey = 'apiuser';
+  //   secretkey = 'bb9e490d4dd335b96aed228dc6e6156fi8l3u';
+  // } else if (process.env.NODE_ENV == 'production') {//生产环境
+  //   accesskey = 'apiuser_mobile';
+  //   secretkey = '59dbb575a2abc63596cdf820ae9e2e52dwm2p';
+  // }
+  let stringSignTemp="accesskey="+accesskey+"&nonce="+nonce+"&timestamp="+timestamp+"&secretkey="+secretkey+""
+  let sign=this.$md5(stringSignTemp).toUpperCase();
+  param.password=Base64.encode(param.password+nonce);
+  param.accesskey=accesskey;
+  param.timestamp=timestamp;
+  param.nonce=nonce;
+  param.sign=sign;
   return new Promise((resolve, reject) => {
     axios.get(url, {params: param})
       .then(response => {

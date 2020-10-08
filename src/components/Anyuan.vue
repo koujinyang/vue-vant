@@ -382,7 +382,7 @@
 
   .telBox{
     font-size: 0.4rem;
-    color: #5c5c5c;
+    color: #4378be;
     /*text-decoration:underline;*/
   }
   .anyuanLabel{
