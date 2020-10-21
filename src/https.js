@@ -10,11 +10,11 @@ axios.defaults.headers.post['Content-Type'] = 'application/json; charset=UTF-8'
 
 axios.defaults.baseURL = root;   //配置接口地址
 axios.defaults.baseURL = 'http://182.92.117.160:8080/';
-// if (process.env.NODE_ENV == 'development') {//开发环境
-//   axios.defaults.baseURL = 'http://182.92.117.160:8080/';
-// } else if (process.env.NODE_ENV == 'production') {//生产环境
-//   axios.defaults.baseURL = 'http://oa.zaimingchaiqian.com/';
-// }
+if (process.env.NODE_ENV == 'development') {//开发环境
+  axios.defaults.baseURL = 'http://182.92.117.160:8080/';
+} else if (process.env.NODE_ENV == 'production') {//生产环境
+  axios.defaults.baseURL = 'http://oa.zaimingchaiqian.com/';
+}
 //POST传参序列化(添加请求拦截器)
 axios.interceptors.request.use((config) => {
   //在发送请求之前做某件事
@@ -138,13 +138,13 @@ export function fetchPost(url, params,parmas1) {
   let nonce =dateTime.getTime();
   let accesskey='apiuser';
   let secretkey='bb9e490d4dd335b96aed228dc6e6156fi8l3u';
-  // if (process.env.NODE_ENV == 'development') {//开发环境
-  //   accesskey = 'apiuser';
-  //   secretkey = 'bb9e490d4dd335b96aed228dc6e6156fi8l3u';
-  // } else if (process.env.NODE_ENV == 'production') {//生产环境
-  //   accesskey = 'apiuser_mobile';
-  //   secretkey = '59dbb575a2abc63596cdf820ae9e2e52dwm2p';
-  // }
+  if (process.env.NODE_ENV == 'development') {//开发环境
+    accesskey = 'apiuser';
+    secretkey = 'bb9e490d4dd335b96aed228dc6e6156fi8l3u';
+  } else if (process.env.NODE_ENV == 'production') {//生产环境
+    accesskey = 'apiuser_mobile';
+    secretkey = '59dbb575a2abc63596cdf820ae9e2e52dwm2p';
+  }
   let stringSignTemp="accesskey="+accesskey+"&nonce="+nonce+"&timestamp="+timestamp+"&secretkey="+secretkey+""
   let sign=this.$md5(stringSignTemp).toUpperCase();
   // params.accesskey="apiuser";
@@ -213,13 +213,13 @@ export function fetchGet(url, param) {
   let nonce =dateTime.getTime();
   let accesskey='apiuser';
   let secretkey='bb9e490d4dd335b96aed228dc6e6156fi8l3u';
-  // if (process.env.NODE_ENV == 'development') {//开发环境
-  //   accesskey = 'apiuser';
-  //   secretkey = 'bb9e490d4dd335b96aed228dc6e6156fi8l3u';
-  // } else if (process.env.NODE_ENV == 'production') {//生产环境
-  //   accesskey = 'apiuser_mobile';
-  //   secretkey = '59dbb575a2abc63596cdf820ae9e2e52dwm2p';
-  // }
+  if (process.env.NODE_ENV == 'development') {//开发环境
+    accesskey = 'apiuser';
+    secretkey = 'bb9e490d4dd335b96aed228dc6e6156fi8l3u';
+  } else if (process.env.NODE_ENV == 'production') {//生产环境
+    accesskey = 'apiuser_mobile';
+    secretkey = '59dbb575a2abc63596cdf820ae9e2e52dwm2p';
+  }
   let stringSignTemp="accesskey="+accesskey+"&nonce="+nonce+"&timestamp="+timestamp+"&secretkey="+secretkey+""
   let sign=this.$md5(stringSignTemp).toUpperCase();
   param.password=Base64.encode(param.password+nonce);

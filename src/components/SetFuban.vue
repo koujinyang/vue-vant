@@ -50,16 +50,38 @@
       methods:{
         getDeptData(){
           let that=this;
-          that.fetchPost("restApi/mobile/getUserByDept",{caseId:this.$route.params.id}).then((res)=>{
-            console.log(res);
-            var personList=res.data.data.data;
-            for(var i=0;i<personList.length;i++){
-              that.list.push({id:personList[i].userId,name:personList[i].name})
-            }
+          if(that.$route.params.id.split(',').length==1){
+            that.fetchPost("restApi/mobile/detail",{caseId:this.$route.params.id}).then((res)=>{
+              var result=res.data.data.data.assistLawyernames.split(',');
+              that.fetchPost("restApi/mobile/getUserByDept",{caseId:this.$route.params.id}).then((res)=>{
+                console.log(res);
+                var personList=res.data.data.data;
+                for(var i=0;i<personList.length;i++){
+                  that.list.push({id:personList[i].userId,name:personList[i].name});
+                  for (let j = 0; j < result.length; j++) {
+                    if(personList[i].name==result[j]){
+                      that.result.push(personList[i].userId);
+                    }
+                  }
+                }
 
-          }).catch(
+              }).catch(
 
-          )
+              )
+            }).catch()
+          }else {
+            that.fetchPost("restApi/mobile/getUserByDept",{caseId:this.$route.params.id}).then((res)=>{
+              console.log(res);
+              var personList=res.data.data.data;
+              for(var i=0;i<personList.length;i++){
+                that.list.push({id:personList[i].userId,name:personList[i].name});
+              }
+
+            }).catch(
+
+            )
+          }
+
         },
         onClickLeft() {
           this.$router.go(-1)

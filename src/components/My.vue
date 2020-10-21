@@ -92,7 +92,7 @@
   }
   .bottomBox{
     position: fixed;
-    bottom: 120px;
+    bottom: 150px;
     width: 100%;
   }
   .bottomBox1{

@@ -337,8 +337,12 @@
       },
       mounted() {
         console.log(this.$route.params.id);
+        var that=this;
         this.getAnyuanData();
-        this.getGebjinData();
+        setTimeout(function () {
+          that.getGebjinData();
+        },100)
+
       }
     }
 </script>
@@ -349,8 +353,8 @@
 }
   .noGenjin{
     text-align: center;
-    font-size: 20px;
-    line-height: 40px;
+    font-size: 0.4rem;
+    line-height: 0.8rem;
   }
   .genjinTitle,.genjinLabel,.genjinDefault{
     font-size: 0.4rem;
